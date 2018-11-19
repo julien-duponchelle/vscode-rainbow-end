@@ -4,9 +4,28 @@
 
 This extension for ruby code allows to identify keyword / end with colours.
 
-![Ruby](images/1.png)
+![Ruby dark theme](images/1.png)
+![Ruby light theme](images/2.png)
+
+## Colors customization
+
+You can override the color by putting in your `settings.json`:
+
+```json
+{
+    "workbench.colorCustomizations": {
+        "rainbowend.deep1": "#e06c75",
+        "rainbowend.deep2": "#6ca2e0",
+        "rainbowend.deep3": "#e0de6c"
+    }
+}
+```
 
 ## Release Notes
+
+### 0.1.0
+
+Add colors customization
 
 ### 0.0.2
 

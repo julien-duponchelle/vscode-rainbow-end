@@ -4,13 +4,13 @@ import * as vscode from 'vscode';
 
 const deepDecorations = [
 	vscode.window.createTextEditorDecorationType({
-		color: "#e06c75"
+		color: {id: "rainbowend.deep1"}
 	}),
 	vscode.window.createTextEditorDecorationType({
-		color: '#98c379',
+		color: {id: "rainbowend.deep2"}
 	}),
 	vscode.window.createTextEditorDecorationType({
-		color: '#e5c07b',
+		color: {id: "rainbowend.deep3"}
 	})
 ];
 

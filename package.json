@@ -21,6 +21,35 @@
     ],
     "main": "./out/extension",
     "contributes": {
+        "colors": [
+            {
+                "id": "rainbowend.deep1",
+                "description": "Rainbow End color 1",
+                "defaults": {
+                    "dark": "#e06c75",
+                    "light": "#e06c75",
+                    "highContrast": "#ff0015"
+                }
+            },
+            {
+                "id": "rainbowend.deep2",
+                "description": "Rainbow End color 2",
+                "defaults": {
+                    "dark": "#6ca2e0",
+                    "light": "#6ca2e0",
+                    "highContrast": "#1900ff"
+                }
+            },
+            {
+                "id": "rainbowend.deep3",
+                "description": "Rainbow End color 3",
+                "defaults": {
+                    "dark": "#e0de6c",
+                    "light": "#6ce085",
+                    "highContrast": "#fffb00"
+                }
+            }
+        ]
     },
     "scripts": {
         "vscode:prepublish": "npm run compile",
