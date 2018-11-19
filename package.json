@@ -5,6 +5,7 @@
     "displayName": "Rainbow End",
     "description": "This extension color ruby editors with a different color for the deep of the end keyword.",
     "version": "0.0.2",
+    "icon": "images/logo.png",
     "engines": {
         "vscode": "^1.29.0"
     },
