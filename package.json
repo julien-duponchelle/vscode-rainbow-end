@@ -4,7 +4,7 @@
     "license": "Apache-2.0",
     "displayName": "Rainbow End",
     "description": "This extension for ruby code allows to identify keyword / end with colours.",
-    "version": "0.0.2",
+    "version": "0.1.0",
     "icon": "images/logo.png",
     "engines": {
         "vscode": "^1.29.0"
