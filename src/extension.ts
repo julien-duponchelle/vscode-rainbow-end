@@ -17,8 +17,13 @@ const deepDecorations = [
 ];
 
 let timeout : NodeJS.Timer | null = null;
+let regExs: { [index:string] : RegExp} = {};
 
 export function activate(context: vscode.ExtensionContext) {
+	Object.keys(languages).forEach(language => {
+		regExs[language] = buildRegex(language);
+	});
+
 	let activeEditor = vscode.window.activeTextEditor;
 	if (activeEditor) {
 		triggerUpdateDecorations(activeEditor);
@@ -45,16 +50,12 @@ function triggerUpdateDecorations(activeEditor: vscode.TextEditor) {
 	timeout = setTimeout(updateDecorations, 250);
 }
 
-function tokens() {
-	const activeEditor = vscode.window.activeTextEditor;
-	if (!activeEditor) {
-		return [];
-	}
-	const languageConfiguration = languages[activeEditor.document.languageId];
+function buildRegex(language: string) {
+	const languageConfiguration = languages[language];
 	let tokens: Array<string> = languageConfiguration["openTokens"];
 	tokens = tokens.concat(languageConfiguration["closeTokens"]);
 	tokens = tokens.concat(languageConfiguration["neutralTokens"]);
-	return tokens;
+	return RegExp("(^|\\s)(" + tokens.join('|') + ")(\\s|$)", "gm");
 }
 
 function updateDecorations() {
@@ -64,7 +65,6 @@ function updateDecorations() {
 	}
 	const languageConfiguration = languages[activeEditor.document.languageId];
 
-	const regEx = RegExp("(^|\\s)(" + tokens().join('|') + ")(\\s|$)", "gm");
 	const text = activeEditor.document.getText();
 	const options: vscode.DecorationOptions[][] = [];
 	deepDecorations.forEach(d => {
@@ -72,7 +72,7 @@ function updateDecorations() {
 	});
 	let match;
 	let deep = 0;
-	while (match = regEx.exec(text)) {
+	while (match = regExs[activeEditor.document.languageId].exec(text)) {
 		const startIndex = match.index + match[1].length;
 		const startPos = activeEditor.document.positionAt(startIndex);
 		const endPos = activeEditor.document.positionAt(startIndex + match[2].length);

@@ -11,12 +11,15 @@ This extension allows to identify keyword / end with colours.
 
 ## Screenshots
 
-![Ruby dark theme](images/1.png)
+## Ruby
 
 ![Ruby light theme](images/2.png)
 
-![Lua](images/lua.png)
+![Ruby dark theme](images/1.png)
 
+## Lua
+
+![Lua](images/lua.png)
 
 ## Colors customization
 
