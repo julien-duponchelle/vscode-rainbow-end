@@ -14,6 +14,7 @@ export const languages: {
             "while",
             "do",
             "case",
+            "begin"
         ],
         closeTokens: [
             "end",
@@ -21,7 +22,8 @@ export const languages: {
         neutralTokens: [
             "elsif",
             "else",
-            "when"
+            "when",
+            "rescue"
         ]
     },
     lua: {
@@ -39,5 +41,30 @@ export const languages: {
             "else",
             "elseif",
         ]
-    }
+    },
+    elixir: {
+        openTokens: [
+            "defmodule",
+            "defmacro",
+            "def",
+            "if",
+            "while",
+            "for",
+            "case",
+            "cond",
+            "unless",
+            "try"
+        ],
+        closeTokens: [
+            "end",
+        ],
+        neutralTokens: [
+            "do",
+            "else",
+            "elseif",
+            "rescue",
+            "after"
+        ]
+    },
+
 };

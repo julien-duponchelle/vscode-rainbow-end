@@ -8,6 +8,7 @@ This extension allows to identify keyword / end with colours.
 
 * Ruby
 * Lua
+* Elixir
 
 ## Screenshots
 
@@ -20,6 +21,10 @@ This extension allows to identify keyword / end with colours.
 ## Lua
 
 ![Lua](images/lua.png)
+
+## Elixir
+
+![Elixir](images/elixir.png)
 
 ## Colors customization
 

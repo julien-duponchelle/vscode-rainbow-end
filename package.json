@@ -18,7 +18,8 @@
     ],
     "activationEvents": [
         "onLanguage:ruby",
-        "onLanguage:lua"
+        "onLanguage:lua",
+        "onLanguage:elixir"
     ],
     "main": "./out/extension",
     "contributes": {
