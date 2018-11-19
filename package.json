@@ -3,7 +3,7 @@
     "publisher": "jduponchelle",
     "license": "Apache-2.0",
     "displayName": "Rainbow End",
-    "description": "This extension color ruby editors with a different color for the deep of the end keyword.",
+    "description": "This extension for ruby code allows to identify keyword / end with colours.",
     "version": "0.0.2",
     "icon": "images/logo.png",
     "engines": {
@@ -21,12 +21,6 @@
     ],
     "main": "./out/extension",
     "contributes": {
-        "commands": [
-            {
-                "command": "extension.sayHello",
-                "title": "Hello World"
-            }
-        ]
     },
     "scripts": {
         "vscode:prepublish": "npm run compile",

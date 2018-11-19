@@ -1,6 +1,6 @@
 # rainbow-end README
 
-This extension color ruby editors with a different color for the deep of the end keyword.
+This extension for ruby code allows to identify keyword / end with colours.
 
 ![Ruby](images/1.png)
 
