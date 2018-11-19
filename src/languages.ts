@@ -29,13 +29,15 @@ export const languages: {
             "function",
             "if",
             "while",
+            "for"
         ],
         closeTokens: [
             "end",
         ],
         neutralTokens: [
             "then",
-            "else"
+            "else",
+            "elseif",
         ]
     }
 };
