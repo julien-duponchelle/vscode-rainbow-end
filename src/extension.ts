@@ -49,7 +49,7 @@ function updateDecorations() {
 		return;
 	}
 
-	const regEx = /(\s*)(class|module|case|if|def|while|do|end|elsif|else|when)\s*/g;
+	const regEx = /(^|\s)(class|module|case|if|def|while|do|end|elsif|else|when)(\s|$)/gm;
 	const text = activeEditor.document.getText();
 	const options: vscode.DecorationOptions[][] = [];
 	deepDecorations.forEach(d => {
