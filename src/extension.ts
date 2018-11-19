@@ -1,6 +1,8 @@
 'use strict';
 
 import * as vscode from 'vscode';
+import {languages} from './languages';
+
 
 const deepDecorations = [
 	vscode.window.createTextEditorDecorationType({
@@ -43,13 +45,26 @@ function triggerUpdateDecorations(activeEditor: vscode.TextEditor) {
 	timeout = setTimeout(updateDecorations, 250);
 }
 
+function tokens() {
+	const activeEditor = vscode.window.activeTextEditor;
+	if (!activeEditor) {
+		return [];
+	}
+	const languageConfiguration = languages[activeEditor.document.languageId];
+	let tokens: Array<string> = languageConfiguration["openTokens"];
+	tokens = tokens.concat(languageConfiguration["closeTokens"]);
+	tokens = tokens.concat(languageConfiguration["neutralTokens"]);
+	return tokens;
+}
+
 function updateDecorations() {
 	const activeEditor = vscode.window.activeTextEditor;
 	if (!activeEditor) {
 		return;
 	}
+	const languageConfiguration = languages[activeEditor.document.languageId];
 
-	const regEx = /(^|\s)(class|module|case|if|def|while|do|end|elsif|else|when)(\s|$)/gm;
+	const regEx = RegExp("(^|\\s)(" + tokens().join('|') + ")(\\s|$)", "gm");
 	const text = activeEditor.document.getText();
 	const options: vscode.DecorationOptions[][] = [];
 	deepDecorations.forEach(d => {
@@ -64,13 +79,13 @@ function updateDecorations() {
 		const decoration: vscode.DecorationOptions  = { range: new vscode.Range(startPos, endPos) };
 
 
-		if (match[2] === "end") {
+		if (languageConfiguration.closeTokens.indexOf(match[2]) > -1) {
 			if (deep > 0) {
 				deep -= 1;
 			}
 			options[deep % deepDecorations.length].push(decoration);
 		}
-		else if (["else", "elsif", "when"].indexOf(match[2]) > -1) {
+		else if (languageConfiguration.neutralTokens.indexOf(match[2]) > -1) {
 			if (deep > 0) {
 				options[(deep - 1) % deepDecorations.length].push(decoration);
 			}

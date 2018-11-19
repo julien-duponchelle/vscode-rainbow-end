@@ -1,11 +1,22 @@
-# rainbow-end README
+# Rainbow End
 
 [![Marketplace Version](https://vsmarketplacebadge.apphb.com/version/jduponchelle.rainbow-end.svg)](https://marketplace.visualstudio.com/items?itemName=jduponchelle.rainbow-end) [![Installs](https://vsmarketplacebadge.apphb.com/installs/jduponchelle.rainbow-end.svg)](https://marketplace.visualstudio.com/items?itemName=jduponchelle.rainbow-end)
 
-This extension for ruby code allows to identify keyword / end with colours.
+This extension allows to identify keyword / end with colours.
+
+## Languages supported
+
+* Ruby
+* Lua
+
+## Screenshots
 
 ![Ruby dark theme](images/1.png)
+
 ![Ruby light theme](images/2.png)
+
+![Lua](images/lua.png)
+
 
 ## Colors customization
 
@@ -22,6 +33,10 @@ You can override the color by putting in your `settings.json`:
 ```
 
 ## Release Notes
+
+### 0.2.0
+
+Multi languages support
 
 ### 0.1.0
 

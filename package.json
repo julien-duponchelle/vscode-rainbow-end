@@ -17,7 +17,8 @@
         "Other"
     ],
     "activationEvents": [
-        "onLanguage:ruby"
+        "onLanguage:ruby",
+        "onLanguage:lua"
     ],
     "main": "./out/extension",
     "contributes": {
