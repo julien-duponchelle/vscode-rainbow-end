@@ -9,6 +9,7 @@ This extension allows to identify keyword / end with colours.
 * Ruby
 * Lua
 * Elixir
+* Crystal
 
 ## Screenshots
 
@@ -26,6 +27,11 @@ This extension allows to identify keyword / end with colours.
 
 ![Elixir](images/elixir.png)
 
+## Crystal
+
+![Crystal](images/crystal.png)
+
+
 ## Colors customization
 
 You can override the color by putting in your `settings.json`:
@@ -41,6 +47,10 @@ You can override the color by putting in your `settings.json`:
 ```
 
 ## Release Notes
+
+### 0.3.0
+
+Add support for Crystal language
 
 ### 0.2.0
 

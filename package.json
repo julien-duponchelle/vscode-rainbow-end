@@ -3,7 +3,7 @@
     "publisher": "jduponchelle",
     "license": "Apache-2.0",
     "displayName": "Rainbow End",
-    "description": "This extension for ruby code allows to identify keyword / end with colours.",
+    "description": "TThis extension allows to identify keyword / end with colours.",
     "version": "0.2.0",
     "icon": "images/logo.png",
     "engines": {
@@ -19,7 +19,8 @@
     "activationEvents": [
         "onLanguage:ruby",
         "onLanguage:lua",
-        "onLanguage:elixir"
+        "onLanguage:elixir",
+        "onLanguage:crystal"
     ],
     "main": "./out/extension",
     "contributes": {

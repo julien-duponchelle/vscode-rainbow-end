@@ -66,5 +66,31 @@ export const languages: {
             "after"
         ]
     },
+    crystal: {
+        openTokens: [
+            "class",
+            "module",
+            "struct",
+            "enum",
+            "macro",
+            "def",
+            "if",
+            "while",
+            "case",
+            "unless",
+            "until",
+            "try"
+        ],
+        closeTokens: [
+            "end",
+        ],
+        neutralTokens: [
+            "do",
+            "else",
+            "elseif",
+            "rescue",
+            "ensure"
+        ]
+    },
 
 };
