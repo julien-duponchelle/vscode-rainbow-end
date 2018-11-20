@@ -4,7 +4,7 @@
     "license": "Apache-2.0",
     "displayName": "Rainbow End",
     "description": "TThis extension allows to identify keyword / end with colours.",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "icon": "images/logo.png",
     "engines": {
         "vscode": "^1.29.0"
@@ -20,7 +20,8 @@
         "onLanguage:ruby",
         "onLanguage:lua",
         "onLanguage:elixir",
-        "onLanguage:crystal"
+        "onLanguage:crystal",
+        "onLanguage:shellscript"
     ],
     "main": "./out/extension",
     "contributes": {

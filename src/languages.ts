@@ -66,6 +66,24 @@ export const languages: {
             "after"
         ]
     },
+    shellscript: {
+        openTokens: [
+            "for",
+            "if",
+            "while",
+            "until"
+        ],
+        closeTokens: [
+            "fi",
+            "done"
+        ],
+        neutralTokens: [
+            "do",
+            "in",
+            "then",
+            "else"
+        ]
+    },
     crystal: {
         openTokens: [
             "class",

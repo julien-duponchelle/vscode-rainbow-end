@@ -10,6 +10,7 @@ This extension allows to identify keyword / end with colours.
 * Lua
 * Elixir
 * Crystal
+* Shell
 
 ## Screenshots
 
@@ -31,6 +32,9 @@ This extension allows to identify keyword / end with colours.
 
 ![Crystal](images/crystal.png)
 
+## Shell
+
+![Shell](images/shell.png)
 
 ## Colors customization
 
@@ -50,7 +54,8 @@ You can override the color by putting in your `settings.json`:
 
 ### 0.3.0
 
-Add support for Crystal language
+* Add support for Crystal language
+* Add support for Shell language
 
 ### 0.2.0
 
