@@ -2,6 +2,7 @@
 
 * Upgrade dependencies
 * Add a dedicated changelog
+* Add support for the ruby keyword unless
 
 
 ### 0.3.0

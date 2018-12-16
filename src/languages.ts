@@ -14,7 +14,8 @@ export const languages: {
             "while",
             "do",
             "case",
-            "begin"
+            "begin",
+            "unless",
         ],
         closeTokens: [
             "end",
