@@ -1,9 +1,9 @@
-## Unreleased
+## 0.4.0
 
 * Upgrade dependencies
 * Add a dedicated changelog
 * Add support for the ruby keyword unless
-
+* Ruby inline if & unless support (Fix #2)
 
 ### 0.3.0
 
