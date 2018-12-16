@@ -1,21 +1,24 @@
 export const languages: {
     [index:string] : {
+        inlineOpenTokens: Array<string>,
         openTokens: Array<string>,
         closeTokens: Array<string>,
         neutralTokens: Array<string>
     }
 } = {
     ruby: {
+        inlineOpenTokens: [ // Allow stuff like return toto if tutu
+            "if",
+            "unless",
+        ],
         openTokens: [
             "class",
             "module",
-            "if",
             "def",
             "while",
             "do",
             "case",
             "begin",
-            "unless",
         ],
         closeTokens: [
             "end",
@@ -28,6 +31,7 @@ export const languages: {
         ]
     },
     lua: {
+        inlineOpenTokens: [],
         openTokens: [
             "function",
             "if",
@@ -44,6 +48,7 @@ export const languages: {
         ]
     },
     elixir: {
+        inlineOpenTokens: [],
         openTokens: [
             "defmodule",
             "defmacro",
@@ -68,6 +73,7 @@ export const languages: {
         ]
     },
     shellscript: {
+        inlineOpenTokens: [],
         openTokens: [
             "for",
             "if",
@@ -86,6 +92,7 @@ export const languages: {
         ]
     },
     crystal: {
+        inlineOpenTokens: [],
         openTokens: [
             "class",
             "module",
@@ -111,5 +118,4 @@ export const languages: {
             "ensure"
         ]
     },
-
 };

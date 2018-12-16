@@ -53,9 +53,10 @@ function triggerUpdateDecorations(activeEditor: vscode.TextEditor) {
 function buildRegex(language: string) {
 	const languageConfiguration = languages[language];
 	let tokens: Array<string> = languageConfiguration["openTokens"];
+	tokens = tokens.concat(languageConfiguration["inlineOpenTokens"]);
 	tokens = tokens.concat(languageConfiguration["closeTokens"]);
 	tokens = tokens.concat(languageConfiguration["neutralTokens"]);
-	return RegExp("(^|\\s)(" + tokens.join('|') + ")(\\s|$)", "gm");
+	return RegExp("(^[ \t]*|[^\n \t][ \t]+)(" + tokens.join('|') + ")(\\s|$)", "gm");
 }
 
 function updateDecorations() {
@@ -78,7 +79,6 @@ function updateDecorations() {
 		const endPos = activeEditor.document.positionAt(startIndex + match[2].length);
 		const decoration: vscode.DecorationOptions  = { range: new vscode.Range(startPos, endPos) };
 
-
 		if (languageConfiguration.closeTokens.indexOf(match[2]) > -1) {
 			if (deep > 0) {
 				deep -= 1;
@@ -90,9 +90,16 @@ function updateDecorations() {
 				options[(deep - 1) % deepDecorations.length].push(decoration);
 			}
 		}
-		else {
+		else if (languageConfiguration.openTokens.indexOf(match[2]) > -1) {
 			options[deep % deepDecorations.length].push(decoration);
 			deep += 1;
+		}
+		else {
+			console.log('"' + match[1] + '";');
+			if (match[1].length === 0 || match[1].match("^[\\s\n]+$")) {
+				options[deep % deepDecorations.length].push(decoration);
+				deep += 1;
+			}
 		}
 	}
 
