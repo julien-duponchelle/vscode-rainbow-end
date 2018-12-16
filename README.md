@@ -52,23 +52,4 @@ You can override the color by putting in your `settings.json`:
 
 ## Release Notes
 
-### 0.3.0
-
-* Add support for Crystal language
-* Add support for Shell language
-
-### 0.2.0
-
-Multi languages support
-
-### 0.1.0
-
-Add colors customization
-
-### 0.0.2
-
-Fix parsing when keyword are in the middle of another word
-
-### 0.0.1
-
-Initial release of Rainbow End
+See [Change log](CHANGELOG.md)
