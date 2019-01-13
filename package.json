@@ -21,7 +21,8 @@
         "onLanguage:lua",
         "onLanguage:elixir",
         "onLanguage:crystal",
-        "onLanguage:shellscript"
+        "onLanguage:shellscript",
+        "onLanguage:verilog"
     ],
     "main": "./out/extension",
     "contributes": {

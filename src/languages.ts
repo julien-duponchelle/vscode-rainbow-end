@@ -91,6 +91,24 @@ export const languages: {
             "else"
         ]
     },
+    verilog: {
+        inlineOpenTokens: [],
+        openTokens: [
+            "if",
+            "module",
+            "case",
+            "always"
+        ],
+        closeTokens: [
+            "end",
+            "endmodule",
+            "endcase"
+        ],
+        neutralTokens: [
+            "begin",
+            "else"
+        ]
+    },
     crystal: {
         inlineOpenTokens: [],
         openTokens: [

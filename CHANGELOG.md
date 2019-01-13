@@ -1,3 +1,7 @@
+## 0.5.0
+
+* Verilog support
+
 ## 0.4.0
 
 * Upgrade dependencies
