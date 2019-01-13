@@ -11,6 +11,7 @@ This extension allows to identify keyword / end with colours.
 * Elixir
 * Crystal
 * Shell
+* Verilog
 
 ## Screenshots
 
@@ -32,6 +33,10 @@ This extension allows to identify keyword / end with colours.
 
 ![Crystal](images/crystal.png)
 
+## Crystal
+
+![Verilog](images/verilog.png)
+
 ## Shell
 
 ![Shell](images/shell.png)
@@ -49,6 +54,15 @@ You can override the color by putting in your `settings.json`:
     }
 }
 ```
+
+## Add new language
+
+You can open an issue with sample code for the language you want to have.
+
+Or you can contribute it by adding the language in:
+* package.json
+* language.ts
+
 
 ## Release Notes
 
