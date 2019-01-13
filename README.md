@@ -33,7 +33,7 @@ This extension allows to identify keyword / end with colours.
 
 ![Crystal](images/crystal.png)
 
-## Crystal
+## Verilog
 
 ![Verilog](images/verilog.png)
 
