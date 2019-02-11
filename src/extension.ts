@@ -95,7 +95,6 @@ function updateDecorations() {
 			deep += 1;
 		}
 		else {
-			console.log('"' + match[1] + '";');
 			if (match[1].length === 0 || match[1].match("^[\\s\n]+$")) {
 				options[deep % deepDecorations.length].push(decoration);
 				deep += 1;

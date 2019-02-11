@@ -1,3 +1,8 @@
+## 0.5.1
+
+* Add loop keyword for ruby
+* Add with and quote keywords for Elixir (#4)
+
 ## 0.5.0
 
 * Verilog support

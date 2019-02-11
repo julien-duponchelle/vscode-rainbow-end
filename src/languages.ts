@@ -19,6 +19,7 @@ export const languages: {
             "do",
             "case",
             "begin",
+            "loop",
         ],
         closeTokens: [
             "end",
@@ -59,7 +60,9 @@ export const languages: {
             "case",
             "cond",
             "unless",
-            "try"
+            "try",
+            "quote",
+            "with",
         ],
         closeTokens: [
             "end",
