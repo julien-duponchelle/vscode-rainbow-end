@@ -109,6 +109,21 @@ export const languages: {
             "else"
         ]
     },
+    vhdl: {
+        inlineOpenTokens: [],
+        openTokens: [
+            "entity",
+            "architecture",
+            "component",
+            "process"
+        ],
+        closeTokens: [
+            "end",
+        ],
+        neutralTokens: [
+            "begin"
+        ]
+    },
     crystal: {
         inlineOpenTokens: [],
         openTokens: [

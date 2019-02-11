@@ -22,7 +22,8 @@
         "onLanguage:elixir",
         "onLanguage:crystal",
         "onLanguage:shellscript",
-        "onLanguage:verilog"
+        "onLanguage:verilog",
+        "onLanguage:vhdl"
     ],
     "main": "./out/extension",
     "contributes": {
