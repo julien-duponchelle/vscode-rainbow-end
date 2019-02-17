@@ -141,13 +141,13 @@ export const languages: {
             "case",
             "unless",
             "until",
-            "try"
+            "try",
+            "do",
         ],
         closeTokens: [
             "end",
         ],
         neutralTokens: [
-            "do",
             "else",
             "elseif",
             "rescue",

@@ -1,3 +1,7 @@
+## 0.5.2
+
+* Fix do-end for crystal
+
 ## 0.5.1
 
 * Add loop keyword for ruby
