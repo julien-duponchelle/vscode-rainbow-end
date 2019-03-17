@@ -116,15 +116,15 @@ export const languages: {
         inlineOpenTokens: [],
         openTokens: [
             "entity",
-            "architecture",
             "component",
-            "process"
+            "case",
+            "begin"
         ],
         closeTokens: [
             "end",
+            "endcase"
         ],
         neutralTokens: [
-            "begin"
         ]
     },
     crystal: {

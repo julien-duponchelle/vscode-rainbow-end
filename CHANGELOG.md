@@ -1,3 +1,7 @@
+## 0.5.3
+
+* Fixes for VHDL
+
 ## 0.5.2
 
 * Fix do-end for crystal
