@@ -1,3 +1,7 @@
+## 0.5.4
+
+* Fixes for Verilog
+
 ## 0.5.3
 
 * Fixes for VHDL

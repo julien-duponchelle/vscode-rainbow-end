@@ -97,10 +97,9 @@ export const languages: {
     verilog: {
         inlineOpenTokens: [],
         openTokens: [
-            "if",
             "module",
             "case",
-            "always"
+            "begin"
         ],
         closeTokens: [
             "end",
@@ -108,8 +107,6 @@ export const languages: {
             "endcase"
         ],
         neutralTokens: [
-            "begin",
-            "else"
         ]
     },
     vhdl: {
