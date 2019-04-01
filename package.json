@@ -23,7 +23,8 @@
         "onLanguage:crystal",
         "onLanguage:shellscript",
         "onLanguage:verilog",
-        "onLanguage:vhdl"
+        "onLanguage:vhdl",
+        "onLanguage:COBOL"
     ],
     "main": "./out/extension",
     "contributes": {

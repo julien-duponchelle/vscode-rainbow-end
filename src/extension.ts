@@ -56,7 +56,7 @@ function buildRegex(language: string) {
 	tokens = tokens.concat(languageConfiguration["inlineOpenTokens"]);
 	tokens = tokens.concat(languageConfiguration["closeTokens"]);
 	tokens = tokens.concat(languageConfiguration["neutralTokens"]);
-	return RegExp("(^[ \t]*|[^\n \t][ \t]+)(" + tokens.join('|') + ")(\\s|$)", "gm");
+	return RegExp("(^[ \t]*|[^\n \t][ \t]+)(" + tokens.join('|') + ")(\\s|\.|$)", "gm");
 }
 
 function updateDecorations() {
@@ -66,13 +66,17 @@ function updateDecorations() {
 	}
 	const languageConfiguration = languages[activeEditor.document.languageId];
 
-	const text = activeEditor.document.getText();
+	let text = activeEditor.document.getText();
 	const options: vscode.DecorationOptions[][] = [];
 	deepDecorations.forEach(d => {
 		options.push([]);
 	});
 	let match;
 	let deep = 0;
+
+	if (languageConfiguration.caseSensitive) {
+		text = text.toLowerCase();
+	}
 	while (match = regExs[activeEditor.document.languageId].exec(text)) {
 		const startIndex = match.index + match[1].length;
 		const startPos = activeEditor.document.positionAt(startIndex);
