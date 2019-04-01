@@ -8,7 +8,7 @@ export const languages: {
     }
 } = {
     ruby: {
-        caseSensitive: false,
+        caseSensitive: true,
         inlineOpenTokens: [ // Allow stuff like return toto if tutu
             "if",
             "unless",
@@ -34,7 +34,7 @@ export const languages: {
         ]
     },
     lua: {
-        caseSensitive: false,
+        caseSensitive: true,
         inlineOpenTokens: [],
         openTokens: [
             "function",
@@ -52,7 +52,7 @@ export const languages: {
         ]
     },
     elixir: {
-        caseSensitive: false,
+        caseSensitive: true,
         inlineOpenTokens: [],
         openTokens: [
             "defmodule",
@@ -80,7 +80,7 @@ export const languages: {
         ]
     },
     shellscript: {
-        caseSensitive: false,
+        caseSensitive: true,
         inlineOpenTokens: [],
         openTokens: [
             "for",
@@ -100,7 +100,7 @@ export const languages: {
         ]
     },
     verilog: {
-        caseSensitive: false,
+        caseSensitive: true,
         inlineOpenTokens: [],
         openTokens: [
             "module",
@@ -116,7 +116,7 @@ export const languages: {
         ]
     },
     vhdl: {
-        caseSensitive: false,
+        caseSensitive: true,
         inlineOpenTokens: [],
         openTokens: [
             "entity",
@@ -132,7 +132,7 @@ export const languages: {
         ]
     },
     crystal: {
-        caseSensitive: false,
+        caseSensitive: true,
         inlineOpenTokens: [],
         openTokens: [
             "class",
@@ -160,7 +160,7 @@ export const languages: {
         ]
     },
     COBOL: {
-        caseSensitive: true,
+        caseSensitive: false,
         inlineOpenTokens: [],
         openTokens: [
             "perform",

@@ -74,7 +74,8 @@ function updateDecorations() {
 	let match;
 	let deep = 0;
 
-	if (languageConfiguration.caseSensitive) {
+	// if we are not case sensitive, then ensure the case of text matches then keyworkd matches
+	if (!languageConfiguration.caseSensitive) {
 		text = text.toLowerCase();
 	}
 	while (match = regExs[activeEditor.document.languageId].exec(text)) {
