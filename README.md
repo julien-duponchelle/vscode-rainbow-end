@@ -12,6 +12,7 @@ This extension allows to identify keyword / end with colours.
 * Crystal
 * Shell
 * Verilog
+* COBOL
 
 ## Screenshots
 
