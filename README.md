@@ -41,6 +41,10 @@ This extension allows to identify keyword / end with colours.
 
 ![Shell](images/shell.png)
 
+## COBOL
+
+![COBOL](images/cobol.png)
+
 ## Colors customization
 
 You can override the color by putting in your `settings.json`:

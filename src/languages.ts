@@ -163,13 +163,15 @@ export const languages: {
         caseSensitive: false,
         inlineOpenTokens: [],
         openTokens: [
+            "program-id",
             "perform",
             "evalute",
             "read",
             "perform",
             "call",
             "evaluate",
-            "if"
+            "if",
+            "method-id"
         ],
         closeTokens: [
             "end-perform",
@@ -178,11 +180,17 @@ export const languages: {
             "end-perform",
             "end-call",
             "end-evaluate",
-            "end-if"
+            "end-if",
+            "end program",
+            "end method"
         ],
         neutralTokens: [
+            "entry",
             "else",
-            "when"
+            "when",
+            "procedure division",
+            "goback",
+            "exit program"
         ]
     },
 };
