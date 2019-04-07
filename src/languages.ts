@@ -1,5 +1,6 @@
 export const languages: {
-    [index:string] : {
+    [index: string]: {
+        caseSensitive: boolean,
         inlineOpenTokens: Array<string>,
         openTokens: Array<string>,
         closeTokens: Array<string>,
@@ -7,6 +8,7 @@ export const languages: {
     }
 } = {
     ruby: {
+        caseSensitive: true,
         inlineOpenTokens: [ // Allow stuff like return toto if tutu
             "if",
             "unless",
@@ -32,6 +34,7 @@ export const languages: {
         ]
     },
     lua: {
+        caseSensitive: true,
         inlineOpenTokens: [],
         openTokens: [
             "function",
@@ -49,6 +52,7 @@ export const languages: {
         ]
     },
     elixir: {
+        caseSensitive: true,
         inlineOpenTokens: [],
         openTokens: [
             "defmodule",
@@ -76,6 +80,7 @@ export const languages: {
         ]
     },
     shellscript: {
+        caseSensitive: true,
         inlineOpenTokens: [],
         openTokens: [
             "for",
@@ -95,6 +100,7 @@ export const languages: {
         ]
     },
     verilog: {
+        caseSensitive: true,
         inlineOpenTokens: [],
         openTokens: [
             "module",
@@ -110,6 +116,7 @@ export const languages: {
         ]
     },
     vhdl: {
+        caseSensitive: true,
         inlineOpenTokens: [],
         openTokens: [
             "entity",
@@ -125,6 +132,7 @@ export const languages: {
         ]
     },
     crystal: {
+        caseSensitive: true,
         inlineOpenTokens: [],
         openTokens: [
             "class",
@@ -149,6 +157,40 @@ export const languages: {
             "elseif",
             "rescue",
             "ensure"
+        ]
+    },
+    COBOL: {
+        caseSensitive: false,
+        inlineOpenTokens: [],
+        openTokens: [
+            "program-id",
+            "perform",
+            "evalute",
+            "read",
+            "perform",
+            "call",
+            "evaluate",
+            "if",
+            "method-id"
+        ],
+        closeTokens: [
+            "end-perform",
+            "end-evalute",
+            "end-read",
+            "end-perform",
+            "end-call",
+            "end-evaluate",
+            "end-if",
+            "end program",
+            "end method"
+        ],
+        neutralTokens: [
+            "entry",
+            "else",
+            "when",
+            "procedure division",
+            "goback",
+            "exit program"
         ]
     },
 };

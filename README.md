@@ -12,6 +12,7 @@ This extension allows to identify keyword / end with colours.
 * Crystal
 * Shell
 * Verilog
+* COBOL
 
 ## Screenshots
 
@@ -40,6 +41,10 @@ This extension allows to identify keyword / end with colours.
 ## Shell
 
 ![Shell](images/shell.png)
+
+## COBOL
+
+![COBOL](images/cobol.png)
 
 ## Colors customization
 
