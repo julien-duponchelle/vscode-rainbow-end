@@ -1,3 +1,9 @@
+## 0.6.0
+
+By https://github.com/spgennard:
+* Support for case insensitive language
+* Cobol support
+
 ## 0.5.4
 
 * Fixes for Verilog

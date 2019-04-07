@@ -68,6 +68,10 @@ Or you can contribute it by adding the language in:
 * package.json
 * language.ts
 
+## Contributors
+
+* Author: Julien Duponchelle: https://github.com/noplay
+* Cobol support by https://github.com/spgennard
 
 ## Release Notes
 
