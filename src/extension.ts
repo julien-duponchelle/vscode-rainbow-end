@@ -56,7 +56,7 @@ function buildRegex(language: string) {
 	tokens = tokens.concat(languageConfiguration["inlineOpenTokens"]);
 	tokens = tokens.concat(languageConfiguration["closeTokens"]);
 	tokens = tokens.concat(languageConfiguration["neutralTokens"]);
-	return RegExp("(^[ \t]*|[^\n \t][ \t]+)(" + tokens.join('|') + ")(\\b)", "gm");
+	return RegExp("(\\b)(" + tokens.join('|') + ")(\\b)", "gm");
 }
 
 function updateDecorations() {
