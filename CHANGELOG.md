@@ -7,6 +7,10 @@ By https://github.com/polvalente
   - Add said ignore blocks for some of the supported languages
 - Allow matching for the first character in the document
 
+## 0.6.1
+By https://github.com/DianeLooney/
+* Fix word detections 
+
 ## 0.6.0
 
 By https://github.com/spgennard:
