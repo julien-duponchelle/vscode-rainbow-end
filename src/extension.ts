@@ -1,23 +1,23 @@
 'use strict';
 
 import * as vscode from 'vscode';
-import {languages} from './languages';
+import { languages } from './languages';
 
 
 const deepDecorations = [
 	vscode.window.createTextEditorDecorationType({
-		color: {id: "rainbowend.deep1"}
+		color: { id: "rainbowend.deep1" }
 	}),
 	vscode.window.createTextEditorDecorationType({
-		color: {id: "rainbowend.deep2"}
+		color: { id: "rainbowend.deep2" }
 	}),
 	vscode.window.createTextEditorDecorationType({
-		color: {id: "rainbowend.deep3"}
+		color: { id: "rainbowend.deep3" }
 	})
 ];
 
-let timeout : NodeJS.Timer | null = null;
-let regExs: { [index:string] : RegExp} = {};
+let timeout: NodeJS.Timer | null = null;
+let regExs: { [index: string]: RegExp } = {};
 
 export function activate(context: vscode.ExtensionContext) {
 	Object.keys(languages).forEach(language => {
@@ -51,12 +51,31 @@ function triggerUpdateDecorations(activeEditor: vscode.TextEditor) {
 }
 
 function buildRegex(language: string) {
+
 	const languageConfiguration = languages[language];
 	let tokens: Array<string> = languageConfiguration["openTokens"];
 	tokens = tokens.concat(languageConfiguration["inlineOpenTokens"]);
 	tokens = tokens.concat(languageConfiguration["closeTokens"]);
 	tokens = tokens.concat(languageConfiguration["neutralTokens"]);
 	return RegExp("(\\b)(" + tokens.join('|') + ")(\\b)", "gm");
+}
+
+function ignoreInDelimiters(token_pairs: Array<{
+	open: string,
+	close: string
+}> | undefined, text: string) {
+	if (token_pairs) {
+		token_pairs.forEach(({
+			open: open_delim,
+			close: close_delim
+		}) => {
+			let regexp = RegExp(`${open_delim}[^${close_delim}]*${close_delim}`, "gm");
+			text = text.replace(regexp, (match) => {
+				return " ".repeat(match.length);
+			});
+		})
+	}
+	return text;
 }
 
 function updateDecorations() {
@@ -78,11 +97,19 @@ function updateDecorations() {
 	if (!languageConfiguration.caseSensitive) {
 		text = text.toLowerCase();
 	}
+	// substitute all ignore intervals with spaces
+	// this ensures commented code or
+	// keywords inside strings are ignored properly
+
+	// also, prepend a whitespace to allow matching the first character in document
+	// if needed
+
+	text = ' ' + ignoreInDelimiters(languageConfiguration.ignoreInDelimiters, text);
 	while (match = regExs[activeEditor.document.languageId].exec(text)) {
-		const startIndex = match.index + match[1].length;
+		const startIndex = match.index + match[1].length - 1; // Decrement to compensate for added character
 		const startPos = activeEditor.document.positionAt(startIndex);
 		const endPos = activeEditor.document.positionAt(startIndex + match[2].length);
-		const decoration: vscode.DecorationOptions  = { range: new vscode.Range(startPos, endPos) };
+		const decoration: vscode.DecorationOptions = { range: new vscode.Range(startPos, endPos) };
 
 		if (languageConfiguration.closeTokens.indexOf(match[2]) > -1) {
 			if (deep > 0) {
