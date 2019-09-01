@@ -46,6 +46,10 @@ This extension allows to identify keyword / end with colours.
 
 ![COBOL](images/cobol.png)
 
+## Julia
+
+![Julia](images/julia.png)
+
 ## Colors customization
 
 You can override the color by putting in your `settings.json`:
@@ -65,6 +69,7 @@ You can override the color by putting in your `settings.json`:
 You can open an issue with sample code for the language you want to have.
 
 Or you can contribute it by adding the language in:
+
 * package.json
 * language.ts
 

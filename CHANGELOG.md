@@ -1,3 +1,9 @@
+# Changelog
+
+## 0.7.1
+
+- Julia support
+
 ## 0.7.0
 
 By https://github.com/polvalente
@@ -9,7 +15,7 @@ By https://github.com/polvalente
 
 ## 0.6.1
 By https://github.com/DianeLooney/
-* Fix word detections 
+* Fix word detections
 
 ## 0.6.0
 

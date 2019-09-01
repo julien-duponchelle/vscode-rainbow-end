@@ -114,6 +114,41 @@ export const languages: {
     closeTokens: ["end", ", do"],
     neutralTokens: ["do", "else", "elseif", "rescue", "after"]
   },
+  julia: {
+    caseSensitive: true,
+    ignoreInDelimiters: [
+      {
+        open: "#",
+        close: "\n"
+      },
+      {
+        open: '"""',
+        close: '"""'
+      },
+      {
+        open: '"',
+        close: '"'
+      },
+      {
+        open: "'",
+        close: "'"
+      }
+    ],
+    inlineOpenTokens: [],
+    openTokens: [
+      "if",
+      "struct",
+      "begin",
+      "let",
+      "for",
+      "while",
+      "quote",
+      "do",
+      "module"
+    ],
+    closeTokens: ["end"],
+    neutralTokens: ["else", "elseif"]
+  },
   shellscript: {
     caseSensitive: true,
     ignoreInDelimiters: [
