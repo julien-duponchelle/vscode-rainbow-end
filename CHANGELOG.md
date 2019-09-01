@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.7.2
+
+By https://github.com/polvalente
+
+- Fix Lua support by adding 'do' as a neutralToken
+
 ## 0.7.1
 
 - Julia support
