@@ -132,6 +132,14 @@ export const languages: {
       {
         open: "#=",
         close: "=#"
+      },
+      {
+        open: "\\[",
+        close: "\\]"
+      },
+      {
+        open: "\\(",
+        close: "\\)"
       }
     ],
     inlineOpenTokens: [],
