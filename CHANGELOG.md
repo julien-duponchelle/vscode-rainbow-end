@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.7.2
+
+By https://github.com/polvalente
+
+- Ignore blocks now support token nesting
+
 ## 0.7.1
 
 - Julia support
@@ -14,8 +20,10 @@ By https://github.com/polvalente
 - Allow matching for the first character in the document
 
 ## 0.6.1
+
 By https://github.com/DianeLooney/
-* Fix word detections
+
+- Fix word detections
 
 ## 0.6.0
 
