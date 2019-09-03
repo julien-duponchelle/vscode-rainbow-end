@@ -1,9 +1,13 @@
 # Changelog
 
+## 0.7.3
+
+By https://github.com/polvalente
+- Fix Lua support by adding 'do' as a neutralToken
+
 ## 0.7.2
 
 By https://github.com/polvalente
-
 - Ignore blocks now support token nesting
 
 ## 0.7.1

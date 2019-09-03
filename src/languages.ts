@@ -65,7 +65,7 @@ export const languages: {
     inlineOpenTokens: [],
     openTokens: ["function", "if", "while", "for"],
     closeTokens: ["end"],
-    neutralTokens: ["then", "else", "elseif"]
+    neutralTokens: ["do", "then", "else", "elseif"]
   },
   elixir: {
     caseSensitive: true,
