@@ -29,8 +29,7 @@
     ],
     "main": "./out/extension",
     "contributes": {
-        "colors": [
-            {
+        "colors": [{
                 "id": "rainbowend.deep1",
                 "description": "Rainbow End color 1",
                 "defaults": {

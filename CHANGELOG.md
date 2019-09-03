@@ -1,10 +1,14 @@
 # Changelog
 
+## 0.7.3
+
+By https://github.com/polvalente
+- Fix Lua support by adding 'do' as a neutralToken
+
 ## 0.7.2
 
 By https://github.com/polvalente
-
-- Fix Lua support by adding 'do' as a neutralToken
+- Ignore blocks now support token nesting
 
 ## 0.7.1
 
@@ -20,8 +24,10 @@ By https://github.com/polvalente
 - Allow matching for the first character in the document
 
 ## 0.6.1
+
 By https://github.com/DianeLooney/
-* Fix word detections
+
+- Fix word detections
 
 ## 0.6.0
 
