@@ -76,84 +76,93 @@ function ignoreInDelimiters(
   text: string
 ) {
   /* This function replaces text inside each token pair with spaces,
-	   so as to ignore the text between delimiters
-	   Also, if there is an unmatched character, the extension's coloring
-	   will be disabled for the remainder of the file */
+	   so as to ignore the text between delimiters */
   if (token_pairs) {
     token_pairs.forEach(({ open: open_delim, close: close_delim }) => {
-      let openRegexp = RegExp(`${open_delim}`, "gm");
-      let closeRegexp = RegExp(`${close_delim}`, "gm");
+      /* Only allow nesting if delimiters are different */
+      if (open_delim == close_delim) {
+        let regexp = RegExp(
+          `${open_delim}[^${close_delim}]*${close_delim}`,
+          "gm"
+        );
+        text = text.replace(regexp, match => {
+          return " ".repeat(match.length);
+        });
+      } else {
+        let openRegexp = RegExp(`${open_delim}`, "gm");
+        let closeRegexp = RegExp(`${close_delim}`, "gm");
 
-      let indices = [];
+        let indices = [];
 
-      let match = openRegexp.exec(text);
-      if (match == null) {
-        return;
-      }
+        let match = openRegexp.exec(text);
+        if (match == null) {
+          return;
+        }
 
-      while (match != null) {
-        indices.push({ index: match.index, type: "open" });
-        match = openRegexp.exec(text);
-      }
+        while (match != null) {
+          indices.push({ index: match.index, type: "open" });
+          match = openRegexp.exec(text);
+        }
 
-      match = closeRegexp.exec(text);
-      if (match == null) {
-        return;
-      }
-
-      while (match != null) {
-        indices.push({ index: match.index, type: "close" });
         match = closeRegexp.exec(text);
-      }
+        if (match == null) {
+          return;
+        }
 
-      /* Sort by index */
-      indices = indices.sort(({ index: a }, { index: b }) => a - b);
+        while (match != null) {
+          indices.push({ index: match.index, type: "close" });
+          match = closeRegexp.exec(text);
+        }
 
-      let ignore_env_counter = 0;
-      let first_index = indices[0].index;
+        /* Sort by index */
+        indices = indices.sort(({ index: a }, { index: b }) => a - b);
 
-      let index: number;
-      let type: string;
+        let ignore_env_counter = 0;
+        let first_index = indices[0].index;
 
-      /* This isn't so inefficient in that it is
-	     O(indices.length), instead of O(text.length).
-	     Also, the list is already ordered, which is really helpful */
-      for ({ index: index, type: type } of indices) {
-        /* skip current token if trying to close when there is no open block
+        let index: number;
+        let type: string;
+
+        /* This isn't so inefficient in that it is
+    	     O(indices.length), instead of O(text.length).
+	         Also, the list is already ordered, which is really helpful */
+        for ({ index, type } of indices) {
+          /* skip current token if trying to close when there is no open block
            cannot just break because '\n' can be both a closing token and a
            normal line end
-        */
-        if (type == "close" && ignore_env_counter == 0) {
-          continue;
-        }
+          */
+          if (type == "close" && ignore_env_counter == 0) {
+            continue;
+          }
 
-        /* if counter is zero, should begin an ignore block */
-        if (ignore_env_counter == 0) {
-          first_index = index;
-        }
+          /* if counter is zero, should begin an ignore block */
+          if (ignore_env_counter == 0) {
+            first_index = index;
+          }
 
-        if (type == "open") {
-          /* if it is an open token, always increment env counter */
-          ignore_env_counter++;
-        } else {
-          ignore_env_counter--;
-          /* if counter has reached zero after a closing token,
+          if (type == "open") {
+            /* if it is an open token, always increment env counter */
+            ignore_env_counter++;
+          } else {
+            ignore_env_counter--;
+            /* if counter has reached zero after a closing token,
              end ignore block */
-          let last_index = index;
+            let last_index = index;
 
-          /* Set ignore block slice as whitespace and keep the rest */
+            /* Set ignore block slice as whitespace and keep the rest */
+            text =
+              text.slice(0, first_index) +
+              " ".repeat(last_index - first_index + 1) +
+              text.slice(last_index + 1);
+          }
+        }
+
+        if (ignore_env_counter != 0) {
+          /* Didn't close last block */
           text =
             text.slice(0, first_index) +
-            " ".repeat(last_index - first_index + 1) +
-            text.slice(last_index + 1);
+            " ".repeat(text.length - first_index + 1);
         }
-      }
-
-      if (ignore_env_counter != 0) {
-        /* Didn't close last block */
-        text =
-          text.slice(0, first_index) +
-          " ".repeat(text.length - first_index + 1);
       }
     });
   }
