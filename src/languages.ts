@@ -146,8 +146,8 @@ export const languages: {
     openTokens: [
       "if",
       "struct",
-      "abstract type",
-      "primitive type",
+      "abstract\\s+type",
+      "primitive\\s+type",
       "begin",
       "let",
       "for",
