@@ -3,7 +3,8 @@ export const languages: {
     caseSensitive: boolean;
     ignoreInDelimiters?: Array<{
       open: string;
-      close: string;
+      close?: string;
+      singleline?: boolean;
     }>;
     inlineOpenTokens: Array<string>;
     openTokens: Array<string>;
@@ -16,7 +17,7 @@ export const languages: {
     ignoreInDelimiters: [
       {
         open: "#",
-        close: "\n"
+        singleline: true
       },
       { open: "=begin", close: "=end" },
       {
@@ -59,7 +60,7 @@ export const languages: {
       },
       {
         open: "--",
-        close: "\n"
+        singleline: true
       }
     ],
     inlineOpenTokens: [],
@@ -72,7 +73,7 @@ export const languages: {
     ignoreInDelimiters: [
       {
         open: "#",
-        close: "\n"
+        singleline: true
       },
       {
         open: '"""',
@@ -106,20 +107,20 @@ export const languages: {
       "with",
       "defprotocol",
       "defimpl",
-      "schema",
-      "embedded_schema",
+      "schema(?=.+do)",
+      "embedded_schema(?=.+do)",
       "resources(?=.+do)",
       "scope(?=.+do)"
     ],
-    closeTokens: ["end", ", do"],
-    neutralTokens: ["do", "else", "elseif", "rescue", "after"]
+    closeTokens: ["end", "do:"],
+    neutralTokens: ["do", "else", "elseif", "rescue", "after", "->", "<-"]
   },
   julia: {
     caseSensitive: true,
     ignoreInDelimiters: [
       {
         open: "#",
-        close: "\n"
+        singleline: true
       },
       {
         open: '"""',
@@ -154,7 +155,7 @@ export const languages: {
     ignoreInDelimiters: [
       {
         open: "#",
-        close: "\n"
+        singleline: true
       },
       {
         open: '"',
@@ -179,7 +180,7 @@ export const languages: {
       },
       {
         open: "//",
-        close: "\n"
+        singleline: true
       }
     ],
     inlineOpenTokens: [],
@@ -192,7 +193,7 @@ export const languages: {
     ignoreInDelimiters: [
       {
         open: "--",
-        close: "\n"
+        singleline: true
       }
     ],
     inlineOpenTokens: [],
@@ -209,7 +210,7 @@ export const languages: {
       },
       {
         open: "#",
-        close: "\n"
+        singleline: true
       }
     ],
 
