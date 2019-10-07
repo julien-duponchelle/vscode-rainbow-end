@@ -12,14 +12,19 @@ interface TokenizeParams {
   singleLineIgnoreRegExp: RegExp | null;
 }
 
-function findAllMatches(str: any, regexp: RegExp | null, type: string) {
+function findAllMatches(str: string, regexp: RegExp | null, type: string) {
   if (!regexp) {
     return [];
   }
 
-  let matches = str.matchAll(regexp);
+  let matches = [];
+  let m: any = {};
 
-  return [...matches].map(match => {
+  while ((m = regexp.exec(str))) {
+    matches.push(m);
+  }
+
+  return matches.map(match => {
     return {
       pos: match.index,
       length: match[0].length,
@@ -58,6 +63,9 @@ export function tokenize(
 
     return 0;
   });
+  console.log(matches);
+
+  console.log(ignoreMatches);
 
   for (let { pos: begin, length: length } of ignoreMatches) {
     let end = begin + length;
@@ -71,6 +79,7 @@ export function tokenize(
   }
 
   let tokens = matches.filter(({ keep }) => keep);
+  console.log(tokens);
 
   return tokens;
 }

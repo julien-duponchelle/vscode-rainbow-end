@@ -48,9 +48,9 @@ function loadRegexes(language: string) {
 
     singleLineIgnoreTokens = ignoreInDelimiters
       .filter(token => !token.singleline)
-      .map(({ open, close }) => `${open}[^(${close})]*${close}`)
+      .map(({ open, close }) => `${open}`)
       .join("|");
-    singleLineIgnoreRegExp = RegExp(`${singleLineIgnoreTokens}`, "g");
+    singleLineIgnoreRegExp = RegExp(`(${singleLineIgnoreTokens}).*${}`, "g");
   }
 
   let openRegExp = RegExp(`(^|\\s)(${openTokens.join("|")})(?=($|\\s))`, "g");
