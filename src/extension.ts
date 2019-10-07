@@ -47,17 +47,26 @@ function loadRegexes(language: string) {
     ignoreRegExp = RegExp(`${ignoreTokens}`, "gm");
 
     singleLineIgnoreTokens = ignoreInDelimiters
-      .filter(token => !token.singleline)
-      .map(({ open, close }) => `${open}`)
+      .filter(token => token.singleline)
+      .map(({ open }) => `${open}`)
       .join("|");
-    singleLineIgnoreRegExp = RegExp(`(${singleLineIgnoreTokens}).*${}`, "g");
+    singleLineIgnoreRegExp = RegExp(`(${singleLineIgnoreTokens}).*`, "g");
+    console.log(singleLineIgnoreRegExp);
   }
 
-  let openRegExp = RegExp(`(^|\\s)(${openTokens.join("|")})(?=($|\\s))`, "g");
-  let closeRegExp = RegExp(`(^|\\s)(${closeTokens.join("|")})(?=($|\\s))`, "g");
+  /*
+  The (^|\s) and ($|\s) separators are used instead of \b to ensure that any regexp
+  provided as the configurable tokens can be matched.
+  Previously, there was an issue involving the ':' character
+  */
+  let openRegExp = RegExp(`(^|\\s)(${openTokens.join("|")})(?=($|\\s))`, "gm");
+  let closeRegExp = RegExp(
+    `(^|\\s)(${closeTokens.join("|")})(?=($|\\s))`,
+    "gm"
+  );
   let neutralRegExp = RegExp(
     `(^|\\s)(${neutralTokens.join("|")})(?=($|\\s))`,
-    "g"
+    "gm"
   );
 
   return {

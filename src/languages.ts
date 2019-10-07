@@ -92,10 +92,10 @@ export const languages: {
     openTokens: [
       "fn",
       "defmodule",
-      "defmacro(?=.+do)",
-      "defmacrop(?=.+do)",
-      "def(?=.+do)",
-      "defp(?=.+do)",
+      "defmacro",
+      "defmacrop",
+      "def",
+      "defp",
       "if",
       "while",
       "for",
@@ -107,10 +107,10 @@ export const languages: {
       "with",
       "defprotocol",
       "defimpl",
-      "schema(?=.+do)",
-      "embedded_schema(?=.+do)",
-      "resources(?=.+do)",
-      "scope(?=.+do)"
+      "schema",
+      "embedded_schema",
+      "resources",
+      "scope"
     ],
     closeTokens: ["end", "do:"],
     neutralTokens: ["do", "else", "elseif", "rescue", "after", "->", "<-"]
