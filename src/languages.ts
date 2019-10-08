@@ -1,7 +1,7 @@
 export const languages: {
   [index: string]: {
     caseSensitive: boolean;
-    ignoreInDelimiters?: Array<{
+    ignoreBlocks?: Array<{
       open: string;
       close?: string;
       singleline?: boolean;
@@ -14,7 +14,7 @@ export const languages: {
 } = {
   ruby: {
     caseSensitive: true,
-    ignoreInDelimiters: [
+    ignoreBlocks: [
       {
         open: "#",
         singleline: true
@@ -45,7 +45,7 @@ export const languages: {
   },
   lua: {
     caseSensitive: true,
-    ignoreInDelimiters: [
+    ignoreBlocks: [
       {
         open: '"',
         close: '"'
@@ -70,7 +70,7 @@ export const languages: {
   },
   elixir: {
     caseSensitive: true,
-    ignoreInDelimiters: [
+    ignoreBlocks: [
       {
         open: "#",
         singleline: true
@@ -117,7 +117,7 @@ export const languages: {
   },
   julia: {
     caseSensitive: true,
-    ignoreInDelimiters: [
+    ignoreBlocks: [
       {
         open: "#",
         singleline: true
@@ -152,7 +152,7 @@ export const languages: {
   },
   shellscript: {
     caseSensitive: true,
-    ignoreInDelimiters: [
+    ignoreBlocks: [
       {
         open: "#",
         singleline: true
@@ -173,7 +173,7 @@ export const languages: {
   },
   verilog: {
     caseSensitive: true,
-    ignoreInDelimiters: [
+    ignoreBlocks: [
       {
         open: "/\\*",
         close: "\\*/"
@@ -190,7 +190,7 @@ export const languages: {
   },
   vhdl: {
     caseSensitive: true,
-    ignoreInDelimiters: [
+    ignoreBlocks: [
       {
         open: "--",
         singleline: true
@@ -203,7 +203,7 @@ export const languages: {
   },
   crystal: {
     caseSensitive: true,
-    ignoreInDelimiters: [
+    ignoreBlocks: [
       {
         open: '"',
         close: '"'
