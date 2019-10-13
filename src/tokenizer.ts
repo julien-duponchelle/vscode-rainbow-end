@@ -1,12 +1,11 @@
-import { close } from "fs";
-
+"use strict";
 export interface Token {
   pos: number;
   length: number;
   type: string;
 }
 
-interface TokenizeParams {
+export interface TokenizeParams {
   openRegExp: RegExp;
   closeRegExp: RegExp;
   neutralRegExp: RegExp;

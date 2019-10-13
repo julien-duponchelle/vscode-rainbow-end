@@ -2,7 +2,8 @@
 
 import * as vscode from "vscode";
 import { languages } from "./languages";
-import { tokenize, Token } from "./tokenizer";
+import { tokenize, Token, TokenizeParams } from "./tokenizer";
+import { parse } from "./parser";
 
 const deepDecorations = [
   vscode.window.createTextEditorDecorationType({
@@ -18,35 +19,26 @@ const deepDecorations = [
 
 let timeout: NodeJS.Timer | null = null;
 let regExps: {
-  [index: string]: {
-    openRegExp: RegExp;
-    closeRegExp: RegExp;
-    neutralRegExp: RegExp;
-    ignoreRegExp: RegExp | null;
-    singleLineIgnoreRegExp: RegExp | null;
-  };
+  [index: string]: TokenizeParams;
 } = {};
 
 function loadRegexes(language: string) {
-  const {
-    ignoreInDelimiters,
-    openTokens,
-    closeTokens,
-    neutralTokens
-  } = languages[language];
+  const { ignoreBlocks, openTokens, closeTokens, neutralTokens } = languages[
+    language
+  ];
 
   let ignoreTokens = null;
   let singleLineIgnoreTokens = null;
   let ignoreRegExp = null;
   let singleLineIgnoreRegExp = null;
-  if (ignoreInDelimiters) {
-    ignoreTokens = ignoreInDelimiters
+  if (ignoreBlocks) {
+    ignoreTokens = ignoreBlocks
       .filter(token => !token.singleline)
       .map(({ open, close }) => `${open}[^(${close})]*${close}`)
       .join("|");
     ignoreRegExp = RegExp(`${ignoreTokens}`, "gm");
 
-    singleLineIgnoreTokens = ignoreInDelimiters
+    singleLineIgnoreTokens = ignoreBlocks
       .filter(token => token.singleline)
       .map(({ open }) => `${open}`)
       .join("|");
@@ -69,12 +61,17 @@ function loadRegexes(language: string) {
     "gm"
   );
 
+  let openListComprehensionRegExp = null;
+  let closeListComprehensionRegExp = null;
+
   return {
     openRegExp,
     closeRegExp,
     ignoreRegExp,
     singleLineIgnoreRegExp,
-    neutralRegExp
+    neutralRegExp,
+    openListComprehensionRegExp,
+    closeListComprehensionRegExp
   };
 }
 
@@ -130,41 +127,16 @@ function updateDecorations() {
   deepDecorations.forEach(d => {
     options.push([]);
   });
-  let depth = 0;
 
-  // if we are not case sensitive, then ensure the case of text matches then keyworkd matches
+  // if we are not case sensitive, then ensure the case of text matches the keyword matches
   if (!languageConfiguration.caseSensitive) {
     text = text.toLowerCase();
   }
 
   let tokens: Token[] = tokenize(text, regExps[lang]);
 
-  for (let { pos, length, type } of tokens) {
-    const startPos = activeEditor.document.positionAt(pos);
-    const endPos = activeEditor.document.positionAt(pos + length);
-    const decoration: vscode.DecorationOptions = {
-      range: new vscode.Range(startPos, endPos)
-    };
+  parse({ activeEditor, options, tokens });
 
-    switch (type) {
-      case "OPEN BLOCK":
-        // If beginning a new block, push new decoration and increment depth
-        options[depth % deepDecorations.length].push(decoration);
-        depth++;
-        break;
-      case "CLOSE BLOCK":
-        // If closing a block, decrement depth
-        depth = depth > 0 ? depth - 1 : 0;
-        options[depth % deepDecorations.length].push(decoration);
-        break;
-      default:
-        if (depth > 0) {
-          // As default, if the token is in non-zero depth, it is a continuation token and should keep the same color as the opening token
-          options[(depth - 1) % deepDecorations.length].push(decoration);
-        }
-        break;
-    }
-  }
   deepDecorations.forEach((deepDecoration, i) => {
     activeEditor.setDecorations(deepDecoration, options[i]);
   });
