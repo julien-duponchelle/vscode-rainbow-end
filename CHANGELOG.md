@@ -4,7 +4,8 @@
 
 By https://github.com/polvalente
 
-- Fix 'ignoreInDelimiters' nesting
+- Fix 'ignoreInDelimiters' nesting (#20)
+- Refactor code to include new parsing engine (#21)
 
 ## 0.7.3
 
