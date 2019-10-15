@@ -16,6 +16,88 @@ export interface TokenizeParams {
   closeListComprehensionRegExp: RegExp | null;
 }
 
+export function loadRegexes(language: string) {
+  const {
+    ignoreBlocks,
+    openTokens,
+    closeTokens,
+    neutralTokens,
+    listComprehensions
+  } = languages[language];
+
+  let ignoreTokens = null;
+  let singleLineIgnoreTokens = null;
+  let ignoreRegExp = null;
+  let singleLineIgnoreRegExp = null;
+  if (ignoreBlocks) {
+    ignoreTokens = ignoreBlocks
+      .filter(token => !token.singleline)
+      .map(({ open, close }) => `${open}[^(${close})]*${close}`)
+      .join("|");
+    ignoreRegExp = RegExp(`${ignoreTokens}`, "gm");
+
+    singleLineIgnoreTokens = ignoreBlocks
+      .filter(token => token.singleline)
+      .map(({ open }) => `${open}`)
+      .join("|");
+    singleLineIgnoreRegExp = RegExp(`(${singleLineIgnoreTokens}).*`, "g");
+    console.log(singleLineIgnoreRegExp);
+  }
+
+  /*
+  The `regexpPrefix` and `regexpSuffix` separators are used instead of \b to ensure that any regexp
+  provided as the configurable tokens can be matched. This is relaxed so that words preceded or followed by
+  parentheses, square brackets or curly brackets are also matched.
+  Previously, there was an issue involving the ':' character
+  */
+
+  const regexpPrefix = "(^|\\s)";
+  const regexpSuffix = "($|\\s)";
+
+  let openRegExp = RegExp(
+    `(?<=${regexpPrefix})(${openTokens.join("|")})(?=${regexpSuffix})`,
+    "gm"
+  );
+  let closeRegExp = RegExp(
+    `(?<=${regexpPrefix})(${closeTokens.join("|")})(?=${regexpSuffix})`,
+    "gm"
+  );
+  let neutralRegExp = RegExp(
+    `(?<=${regexpPrefix})(${neutralTokens.join("|")})(?=${regexpSuffix})`,
+    "gm"
+  );
+
+  let openListComprehensionRegExp = null;
+  let closeListComprehensionRegExp = null;
+
+  if (listComprehensions) {
+    let openListComprehensionTokens = listComprehensions
+      .map(({ open }) => `${open}`)
+      .join("|");
+    openListComprehensionRegExp = RegExp(
+      `(${openListComprehensionTokens})`,
+      "gm"
+    );
+    let closeListComprehensionTokens = listComprehensions
+      .map(({ close }) => `${close}`)
+      .join("|");
+    closeListComprehensionRegExp = RegExp(
+      `(${closeListComprehensionTokens})`,
+      "gm"
+    );
+  }
+
+  return {
+    openRegExp,
+    closeRegExp,
+    ignoreRegExp,
+    singleLineIgnoreRegExp,
+    neutralRegExp,
+    openListComprehensionRegExp,
+    closeListComprehensionRegExp
+  };
+}
+
 function findAllMatches(str: string, regexp: RegExp | null, type: string) {
   if (!regexp) {
     return [];

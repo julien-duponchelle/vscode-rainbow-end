@@ -2,111 +2,30 @@
 
 import * as vscode from "vscode";
 import { languages } from "./languages";
-import { tokenize, Token, TokenizeParams } from "./tokenizer";
+import { tokenize, loadRegexes, Token, TokenizeParams } from "./tokenizer";
 import { parse, deepDecorations } from "./parser";
 
-let timeout: NodeJS.Timer | null = null;
-let regExps: {
-  [index: string]: TokenizeParams;
-} = {};
-
-function loadRegexes(language: string) {
-  const {
-    ignoreBlocks,
-    openTokens,
-    closeTokens,
-    neutralTokens,
-    listComprehensions
-  } = languages[language];
-
-  let ignoreTokens = null;
-  let singleLineIgnoreTokens = null;
-  let ignoreRegExp = null;
-  let singleLineIgnoreRegExp = null;
-  if (ignoreBlocks) {
-    ignoreTokens = ignoreBlocks
-      .filter(token => !token.singleline)
-      .map(({ open, close }) => `${open}[^(${close})]*${close}`)
-      .join("|");
-    ignoreRegExp = RegExp(`${ignoreTokens}`, "gm");
-
-    singleLineIgnoreTokens = ignoreBlocks
-      .filter(token => token.singleline)
-      .map(({ open }) => `${open}`)
-      .join("|");
-    singleLineIgnoreRegExp = RegExp(`(${singleLineIgnoreTokens}).*`, "g");
-    console.log(singleLineIgnoreRegExp);
-  }
-
-  /*
-  The `regexpPrefix` and `regexpSuffix` separators are used instead of \b to ensure that any regexp
-  provided as the configurable tokens can be matched. This is relaxed so that words preceded or followed by
-  parentheses, square brackets or curly brackets are also matched.
-  Previously, there was an issue involving the ':' character
-  */
-
-  const regexpPrefix = "(^|\\s)";
-  const regexpSuffix = "($|\\s)";
-
-  let openRegExp = RegExp(
-    `(?<=${regexpPrefix})(${openTokens.join("|")})(?=${regexpSuffix})`,
-    "gm"
-  );
-  let closeRegExp = RegExp(
-    `(?<=${regexpPrefix})(${closeTokens.join("|")})(?=${regexpSuffix})`,
-    "gm"
-  );
-  let neutralRegExp = RegExp(
-    `(?<=${regexpPrefix})(${neutralTokens.join("|")})(?=${regexpSuffix})`,
-    "gm"
-  );
-
-  let openListComprehensionRegExp = null;
-  let closeListComprehensionRegExp = null;
-
-  if (listComprehensions) {
-    let openListComprehensionTokens = listComprehensions
-      .map(({ open }) => `${open}`)
-      .join("|");
-    openListComprehensionRegExp = RegExp(
-      `(${openListComprehensionTokens})`,
-      "gm"
-    );
-    let closeListComprehensionTokens = listComprehensions
-      .map(({ close }) => `${close}`)
-      .join("|");
-    closeListComprehensionRegExp = RegExp(
-      `(${closeListComprehensionTokens})`,
-      "gm"
-    );
-  }
-
-  return {
-    openRegExp,
-    closeRegExp,
-    ignoreRegExp,
-    singleLineIgnoreRegExp,
-    neutralRegExp,
-    openListComprehensionRegExp,
-    closeListComprehensionRegExp
-  };
-}
-
 export function activate(context: vscode.ExtensionContext) {
+  let regExps: {
+    [index: string]: TokenizeParams;
+  } = {};
+
+  let timeout: NodeJS.Timer | null = null;
+
   Object.keys(languages).forEach(language => {
     regExps[language] = loadRegexes(language);
   });
 
   let activeEditor = vscode.window.activeTextEditor;
   if (activeEditor) {
-    triggerUpdateDecorations(activeEditor);
+    triggerUpdateDecorations(timeout, regExps);
   }
 
   vscode.window.onDidChangeActiveTextEditor(
     editor => {
       activeEditor = editor;
       if (activeEditor) {
-        triggerUpdateDecorations(activeEditor);
+        triggerUpdateDecorations(timeout, regExps);
       }
     },
     null,
@@ -116,7 +35,7 @@ export function activate(context: vscode.ExtensionContext) {
   vscode.workspace.onDidChangeTextDocument(
     event => {
       if (activeEditor && event.document === activeEditor.document) {
-        triggerUpdateDecorations(activeEditor);
+        timeout = triggerUpdateDecorations(timeout, regExps);
       }
     },
     null,
@@ -124,14 +43,19 @@ export function activate(context: vscode.ExtensionContext) {
   );
 }
 
-function triggerUpdateDecorations(activeEditor: vscode.TextEditor) {
+function triggerUpdateDecorations(
+  timeout: NodeJS.Timer | null,
+  regExps: {
+    [index: string]: TokenizeParams;
+  }
+) {
   if (timeout) {
     clearTimeout(timeout);
   }
-  timeout = setTimeout(updateDecorations, 250);
+  return setTimeout(() => updateDecorations(regExps), 250);
 }
 
-function updateDecorations() {
+function updateDecorations(regExps: { [index: string]: TokenizeParams }) {
   const activeEditor = vscode.window.activeTextEditor;
   if (!activeEditor) {
     return;
