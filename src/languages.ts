@@ -10,7 +10,6 @@ export const languages: {
       open: string;
       close: string;
     }>;
-    inlineOpenTokens: Array<string>;
     openTokens: Array<string>;
     closeTokens: Array<string>;
     neutralTokens: Array<string>;
@@ -28,11 +27,6 @@ export const languages: {
         open: '"',
         close: '"'
       }
-    ],
-    inlineOpenTokens: [
-      // Allow stuff like return toto if tutu
-      "if",
-      "unless"
     ],
     openTokens: [
       "class",
@@ -59,15 +53,10 @@ export const languages: {
         close: "'"
       },
       {
-        open: "--\\[\\[",
-        close: "--\\]\\]"
-      },
-      {
         open: "--",
         singleline: true
       }
     ],
-    inlineOpenTokens: [],
     openTokens: ["function", "if", "while", "for"],
     closeTokens: ["end"],
     neutralTokens: ["do", "then", "else", "elseif"]
@@ -90,15 +79,12 @@ export const languages: {
       {
         open: "'",
         close: "'"
-      }
-    ],
-    listComprehensions: [
+      },
       {
-        open: "\\[",
-        close: "\\]"
+        open: "\\(",
+        close: "\\)"
       }
     ],
-    inlineOpenTokens: [],
     openTokens: [
       "fn",
       "defmodule",
@@ -145,7 +131,12 @@ export const languages: {
         close: "'"
       }
     ],
-    inlineOpenTokens: [],
+    listComprehensions: [
+      {
+        open: "\\[",
+        close: "\\]"
+      }
+    ],
     openTokens: [
       "if",
       "struct",
@@ -176,7 +167,6 @@ export const languages: {
         close: "'"
       }
     ],
-    inlineOpenTokens: [],
     openTokens: ["for", "if", "while", "until"],
     closeTokens: ["fi", "done"],
     neutralTokens: ["do", "in", "then", "else"]
@@ -193,7 +183,6 @@ export const languages: {
         singleline: true
       }
     ],
-    inlineOpenTokens: [],
     openTokens: ["module", "case", "begin"],
     closeTokens: ["end", "endmodule", "endcase"],
     neutralTokens: []
@@ -206,7 +195,6 @@ export const languages: {
         singleline: true
       }
     ],
-    inlineOpenTokens: [],
     openTokens: ["entity", "component", "case", "begin"],
     closeTokens: ["end", "endcase"],
     neutralTokens: []
@@ -223,8 +211,6 @@ export const languages: {
         singleline: true
       }
     ],
-
-    inlineOpenTokens: [],
     openTokens: [
       "class",
       "module",
@@ -245,7 +231,6 @@ export const languages: {
   },
   COBOL: {
     caseSensitive: false,
-    inlineOpenTokens: [],
     openTokens: [
       "program-id",
       "perform",
