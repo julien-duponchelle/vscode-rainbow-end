@@ -6,6 +6,10 @@ export const languages: {
       close?: string;
       singleline?: boolean;
     }>;
+    listComprehensions?: Array<{
+      open: string;
+      close: string;
+    }>;
     inlineOpenTokens: Array<string>;
     openTokens: Array<string>;
     closeTokens: Array<string>;
@@ -86,6 +90,12 @@ export const languages: {
       {
         open: "'",
         close: "'"
+      }
+    ],
+    listComprehensions: [
+      {
+        open: "\\[",
+        close: "\\]"
       }
     ],
     inlineOpenTokens: [],

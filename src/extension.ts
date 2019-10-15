@@ -3,19 +3,7 @@
 import * as vscode from "vscode";
 import { languages } from "./languages";
 import { tokenize, Token, TokenizeParams } from "./tokenizer";
-import { parse } from "./parser";
-
-const deepDecorations = [
-  vscode.window.createTextEditorDecorationType({
-    color: { id: "rainbowend.deep1" }
-  }),
-  vscode.window.createTextEditorDecorationType({
-    color: { id: "rainbowend.deep2" }
-  }),
-  vscode.window.createTextEditorDecorationType({
-    color: { id: "rainbowend.deep3" }
-  })
-];
+import { parse, deepDecorations } from "./parser";
 
 let timeout: NodeJS.Timer | null = null;
 let regExps: {
@@ -23,9 +11,13 @@ let regExps: {
 } = {};
 
 function loadRegexes(language: string) {
-  const { ignoreBlocks, openTokens, closeTokens, neutralTokens } = languages[
-    language
-  ];
+  const {
+    ignoreBlocks,
+    openTokens,
+    closeTokens,
+    neutralTokens,
+    listComprehensions
+  } = languages[language];
 
   let ignoreTokens = null;
   let singleLineIgnoreTokens = null;
@@ -47,22 +39,47 @@ function loadRegexes(language: string) {
   }
 
   /*
-  The (^|\s) and ($|\s) separators are used instead of \b to ensure that any regexp
-  provided as the configurable tokens can be matched.
+  The `regexpPrefix` and `regexpSuffix` separators are used instead of \b to ensure that any regexp
+  provided as the configurable tokens can be matched. This is relaxed so that words preceded or followed by
+  parentheses, square brackets or curly brackets are also matched.
   Previously, there was an issue involving the ':' character
   */
-  let openRegExp = RegExp(`(^|\\s)(${openTokens.join("|")})(?=($|\\s))`, "gm");
+
+  const regexpPrefix = "(^|\\s)";
+  const regexpSuffix = "($|\\s)";
+
+  let openRegExp = RegExp(
+    `(?<=${regexpPrefix})(${openTokens.join("|")})(?=${regexpSuffix})`,
+    "gm"
+  );
   let closeRegExp = RegExp(
-    `(^|\\s)(${closeTokens.join("|")})(?=($|\\s))`,
+    `(?<=${regexpPrefix})(${closeTokens.join("|")})(?=${regexpSuffix})`,
     "gm"
   );
   let neutralRegExp = RegExp(
-    `(^|\\s)(${neutralTokens.join("|")})(?=($|\\s))`,
+    `(?<=${regexpPrefix})(${neutralTokens.join("|")})(?=${regexpSuffix})`,
     "gm"
   );
 
   let openListComprehensionRegExp = null;
   let closeListComprehensionRegExp = null;
+
+  if (listComprehensions) {
+    let openListComprehensionTokens = listComprehensions
+      .map(({ open }) => `${open}`)
+      .join("|");
+    openListComprehensionRegExp = RegExp(
+      `(${openListComprehensionTokens})`,
+      "gm"
+    );
+    let closeListComprehensionTokens = listComprehensions
+      .map(({ close }) => `${close}`)
+      .join("|");
+    closeListComprehensionRegExp = RegExp(
+      `(${closeListComprehensionTokens})`,
+      "gm"
+    );
+  }
 
   return {
     openRegExp,
@@ -122,9 +139,13 @@ function updateDecorations() {
   let lang = activeEditor.document.languageId;
   const languageConfiguration = languages[lang];
 
+  if (!languageConfiguration) {
+    return;
+  }
+
   let text = activeEditor.document.getText();
   const options: vscode.DecorationOptions[][] = [];
-  deepDecorations.forEach(d => {
+  deepDecorations.forEach((d: any) => {
     options.push([]);
   });
 
@@ -137,7 +158,7 @@ function updateDecorations() {
 
   parse({ activeEditor, options, tokens });
 
-  deepDecorations.forEach((deepDecoration, i) => {
+  deepDecorations.forEach((deepDecoration: any, i: number) => {
     activeEditor.setDecorations(deepDecoration, options[i]);
   });
 }

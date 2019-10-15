@@ -3,6 +3,7 @@ export interface Token {
   pos: number;
   length: number;
   type: string;
+  content: string;
 }
 
 export interface TokenizeParams {
@@ -29,6 +30,7 @@ function findAllMatches(str: string, regexp: RegExp | null, type: string) {
 
   return matches.map(match => {
     return {
+      content: match[0],
       pos: match.index,
       length: match[0].length,
       keep: true,
@@ -70,16 +72,16 @@ export function tokenize(
     "SINGLE LINE COMMENT"
   );
 
-  const ignoreMatchReducer = function(acc: Token[], token: Token) {
+  const matchReducer = function(acc: Token[], token: Token, suffix: string) {
     let { pos, length } = token;
 
-    let open = { ...token, length: 1, type: "OPEN IGNORE" };
+    let open = { ...token, length: 1, type: `OPEN ${suffix}` };
 
     let close = {
       ...token,
       length: 1,
       pos: pos + length - 1,
-      type: "CLOSE IGNORE"
+      type: `CLOSE ${suffix}`
     };
 
     return [...acc, open, close];
@@ -88,15 +90,18 @@ export function tokenize(
   const convertedIgnoreMatches = [
     ...singleLineIgnoreMatches,
     ...ignoreMatches
-  ].reduce(ignoreMatchReducer, []);
+  ].reduce(
+    (acc: Token[], token: Token) => matchReducer(acc, token, "IGNORE"),
+    []
+  );
 
   let matches = [
+    ...openListComprehensionMatches,
+    ...closeListComprehensionMatches,
     ...convertedIgnoreMatches,
     ...openMatches,
     ...closeMatches,
-    ...neutralMatches,
-    ...openListComprehensionMatches,
-    ...closeListComprehensionMatches
+    ...neutralMatches
   ];
 
   let tokens = matches.sort(({ pos: posX }, { pos: posY }) => {
@@ -111,5 +116,6 @@ export function tokenize(
     return 0;
   });
 
+  console.log(tokens);
   return tokens;
 }
