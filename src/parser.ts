@@ -42,7 +42,10 @@ export function parse({ activeEditor, options, tokens }: ParseParams) {
   let mode = DEFAULT;
   let comprehensionDepthStack = [];
 
+  console.log(tokens);
+
   for (let token of tokens) {
+    console.log(token);
     let { pos, length, type } = token;
     /* Switch parsing modes if any of the mode delimiters has been reached */
     if (type === "OPEN IGNORE") {
@@ -53,14 +56,16 @@ export function parse({ activeEditor, options, tokens }: ParseParams) {
       comprehensionDepthStack.push(1);
       continue;
     } else if (type === "CLOSE IGNORE" || type === "CLOSE COMPREHENSION") {
+      comprehensionDepthStack.pop();
+
       if (comprehensionDepthStack.length > 0) {
-        comprehensionDepthStack.pop();
         continue;
       }
-      comprehensionDepthStack = [];
       mode = DEFAULT;
       continue;
     }
+    console.log(mode);
+    console.log(comprehensionDepthStack);
 
     const startPos = activeEditor.document.positionAt(pos);
     const endPos = activeEditor.document.positionAt(pos + length);

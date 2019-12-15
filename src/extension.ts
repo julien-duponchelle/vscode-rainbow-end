@@ -13,7 +13,7 @@ export function activate(context: vscode.ExtensionContext) {
   let timeout: NodeJS.Timer | null = null;
 
   Object.keys(languages).forEach(language => {
-    regExps[language] = loadRegexes(language);
+    regExps[language] = loadRegexes(languages[language]);
   });
 
   let activeEditor = vscode.window.activeTextEditor;

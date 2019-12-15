@@ -1,19 +1,21 @@
+export interface LangParams {
+  caseSensitive: boolean;
+  ignoreBlocks?: Array<{
+    open: string;
+    close?: string;
+    singleline?: boolean;
+  }>;
+  listComprehensions?: Array<{
+    open: string;
+    close: string;
+  }>;
+  openTokens: Array<string>;
+  closeTokens: Array<string>;
+  neutralTokens: Array<string>;
+}
+
 export const languages: {
-  [index: string]: {
-    caseSensitive: boolean;
-    ignoreBlocks?: Array<{
-      open: string;
-      close?: string;
-      singleline?: boolean;
-    }>;
-    listComprehensions?: Array<{
-      open: string;
-      close: string;
-    }>;
-    openTokens: Array<string>;
-    closeTokens: Array<string>;
-    neutralTokens: Array<string>;
-  };
+  [index: string]: LangParams;
 } = {
   ruby: {
     caseSensitive: true,
@@ -63,6 +65,12 @@ export const languages: {
   },
   elixir: {
     caseSensitive: true,
+    listComprehensions: [
+      {
+        open: "\\[",
+        close: "\\]"
+      }
+    ],
     ignoreBlocks: [
       {
         open: "#",

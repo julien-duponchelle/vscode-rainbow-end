@@ -1,4 +1,6 @@
 "use strict";
+
+import { LangParams } from "./languages";
 export interface Token {
   pos: number;
   length: number;
@@ -16,14 +18,14 @@ export interface TokenizeParams {
   closeListComprehensionRegExp: RegExp | null;
 }
 
-export function loadRegexes(language: string) {
+export function loadRegexes(langParams: LangParams) {
   const {
     ignoreBlocks,
     openTokens,
     closeTokens,
     neutralTokens,
     listComprehensions
-  } = languages[language];
+  } = langParams;
 
   let ignoreTokens = null;
   let singleLineIgnoreTokens = null;
