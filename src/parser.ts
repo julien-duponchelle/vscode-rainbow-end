@@ -13,12 +13,12 @@ interface SubParserParams {
   decoration: vscode.DecorationOptions;
   options: vscode.DecorationOptions[][];
   token: Token;
-  depth: number;
+  decorationDepth: number;
 }
 
 interface SubParserResult {
   options: vscode.DecorationOptions[][];
-  depth: number;
+  decorationDepth: number;
 }
 
 export const deepDecorations = [
@@ -38,9 +38,9 @@ const IGNORE = 1;
 const COMPREHENSION = 2;
 
 export function parse({ activeEditor, options, tokens }: ParseParams) {
-  let depth = 0;
-  let comprehensionDepth = 0;
+  let decorationDepth = 0;
   let mode = DEFAULT;
+  let comprehensionDepthStack = [];
 
   for (let token of tokens) {
     let { pos, length, type } = token;
@@ -50,14 +50,14 @@ export function parse({ activeEditor, options, tokens }: ParseParams) {
       continue;
     } else if (type === "OPEN COMPREHENSION") {
       mode = COMPREHENSION;
-      comprehensionDepth++;
+      comprehensionDepthStack.push(1);
       continue;
     } else if (type === "CLOSE IGNORE" || type === "CLOSE COMPREHENSION") {
-      comprehensionDepth--;
-      if (comprehensionDepth > 0) {
+      if (comprehensionDepthStack.length > 0) {
+        comprehensionDepthStack.pop();
         continue;
       }
-      comprehensionDepth = 0;
+      comprehensionDepthStack = [];
       mode = DEFAULT;
       continue;
     }
@@ -68,58 +68,61 @@ export function parse({ activeEditor, options, tokens }: ParseParams) {
       range: new vscode.Range(startPos, endPos)
     };
 
-    let result = { depth, options };
-    console.log(mode);
+    let result = { decorationDepth, options };
     switch (mode) {
       // case IGNORE:
       /* A new parseInComment function could be implemented to allow for different highlighting
         instead of just ignoring */
-      // result = parseInComment({ decoration, depth, options, token });
+      // result = parseInComment({ decoration, decorationDepth, options, token });
       // break;
       case COMPREHENSION:
-        console.log(token);
-        result = parseInComprehension({ decoration, depth, options, token });
+        result = parseInComprehension({
+          decoration,
+          decorationDepth,
+          options,
+          token
+        });
         break;
       case DEFAULT:
-        console.log(token);
-        result = parseDefault({ decoration, depth, options, token });
+        result = parseDefault({ decoration, decorationDepth, options, token });
         break;
       default:
-        console.log("default: skip");
         break;
     }
-    depth = result.depth;
+    decorationDepth = result.decorationDepth;
     options = result.options;
   }
 }
 
 function parseDefault(params: SubParserParams): SubParserResult {
-  let { decoration, token, depth, options } = params;
+  let { decoration, token, decorationDepth, options } = params;
   switch (token.type) {
     case "OPEN BLOCK":
-      // If beginning a new block, push new decoration and increment depth
-      options[depth % deepDecorations.length].push(decoration);
-      depth++;
+      // If beginning a new block, push new decoration and increment decorationDepth
+      options[decorationDepth % deepDecorations.length].push(decoration);
+      decorationDepth++;
       break;
     case "CLOSE BLOCK":
-      // If closing a block, decrement depth
-      depth = depth > 0 ? depth - 1 : 0;
-      options[depth % deepDecorations.length].push(decoration);
+      // If closing a block, decrement decorationDepth
+      decorationDepth = decorationDepth > 0 ? decorationDepth - 1 : 0;
+      options[decorationDepth % deepDecorations.length].push(decoration);
       break;
     default:
-      if (depth > 0) {
-        // As default, if the token is in non-zero depth, it is a continuation token and should keep the same color as the opening token
-        options[(depth - 1) % deepDecorations.length].push(decoration);
+      if (decorationDepth > 0) {
+        // As default, if the token is in non-zero decorationDepth, it is a continuation token and should keep the same color as the opening token
+        options[(decorationDepth - 1) % deepDecorations.length].push(
+          decoration
+        );
       }
       break;
   }
 
-  return { depth, options };
+  return { decorationDepth, options };
 }
 
 function parseInComprehension(params: SubParserParams): SubParserResult {
   /* For simplicity, in comprehensions,
-  all open-block and close-block tokens will be highlighted with the same depth color
+  all open-block and close-block tokens will be highlighted with the same decorationDepth color
   The color is the next down from the previous block
 
   i.e.:
@@ -129,16 +132,18 @@ function parseInComprehension(params: SubParserParams): SubParserResult {
   ]
   */
 
-  let { decoration, token, depth, options } = params;
-  let comprehensionDepth = depth + 1;
+  let { decoration, token, decorationDepth, options } = params;
+  let comprehensionDecorationDepth = decorationDepth + 1;
 
   if (
     token.type === "OPEN BLOCK" ||
     token.type === "CLOSE BLOCK" ||
     token.type === "NEUTRAL"
   ) {
-    options[comprehensionDepth % deepDecorations.length].push(decoration);
+    options[comprehensionDecorationDepth % deepDecorations.length].push(
+      decoration
+    );
   }
 
-  return { depth, options };
+  return { decorationDepth, options };
 }
