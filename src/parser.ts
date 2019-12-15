@@ -42,10 +42,7 @@ export function parse({ activeEditor, options, tokens }: ParseParams) {
   let mode = DEFAULT;
   let comprehensionDepthStack = [];
 
-  console.log(tokens);
-
   for (let token of tokens) {
-    console.log(token);
     let { pos, length, type } = token;
     /* Switch parsing modes if any of the mode delimiters has been reached */
     if (type === "OPEN IGNORE") {
@@ -64,9 +61,6 @@ export function parse({ activeEditor, options, tokens }: ParseParams) {
       mode = DEFAULT;
       continue;
     }
-    console.log(mode);
-    console.log(comprehensionDepthStack);
-
     const startPos = activeEditor.document.positionAt(pos);
     const endPos = activeEditor.document.positionAt(pos + length);
     const decoration: vscode.DecorationOptions = {

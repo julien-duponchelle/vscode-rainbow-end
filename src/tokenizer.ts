@@ -43,7 +43,6 @@ export function loadRegexes(langParams: LangParams) {
       .map(({ open }) => `${open}`)
       .join("|");
     singleLineIgnoreRegExp = RegExp(`(${singleLineIgnoreTokens}).*`, "g");
-    console.log(singleLineIgnoreRegExp);
   }
 
   /*
@@ -200,6 +199,5 @@ export function tokenize(
     return 0;
   });
 
-  console.log(tokens);
   return tokens;
 }
