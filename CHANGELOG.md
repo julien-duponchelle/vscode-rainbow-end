@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.7.5
+
+- Fix try for Crystal #24
+
 ## 0.7.4
 
 By https://github.com/polvalente
