@@ -229,7 +229,7 @@ export const languages: {
       "do"
     ],
     closeTokens: ["end"],
-    neutralTokens: ["else", "elseif", "rescue", "ensure"]
+    neutralTokens: ["else", "elseif", "elsif", "rescue", "ensure"]
   },
   COBOL: {
     caseSensitive: false,
