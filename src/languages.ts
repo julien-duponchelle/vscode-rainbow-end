@@ -144,7 +144,8 @@ export const languages: {
       "while",
       "quote",
       "do",
-      "module"
+      "module",
+      "function"
     ],
     closeTokens: ["end"],
     neutralTokens: ["else", "elseif"]
