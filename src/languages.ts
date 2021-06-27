@@ -16,18 +16,18 @@ export const languages: {
     ignoreInDelimiters: [
       {
         open: "#",
-        close: "\n",
+        close: "\n"
       },
       { open: "=begin", close: "=end" },
       {
         open: '"',
-        close: '"',
-      },
+        close: '"'
+      }
     ],
     inlineOpenTokens: [
       // Allow stuff like return toto if tutu
       "if",
-      "unless",
+      "unless"
     ],
     openTokens: [
       "class",
@@ -37,55 +37,55 @@ export const languages: {
       "do",
       "case",
       "begin",
-      "loop",
+      "loop"
     ],
     closeTokens: ["end"],
-    neutralTokens: ["elsif", "else", "when", "rescue"],
+    neutralTokens: ["elsif", "else", "when", "rescue"]
   },
   lua: {
     caseSensitive: true,
     ignoreInDelimiters: [
       {
         open: '"',
-        close: '"',
+        close: '"'
       },
       {
         open: "'",
-        close: "'",
+        close: "'"
       },
       {
         open: "--\\[\\[",
-        close: "--\\]\\]",
+        close: "--\\]\\]"
       },
       {
         open: "--",
-        close: "\n",
-      },
+        close: "\n"
+      }
     ],
     inlineOpenTokens: [],
     openTokens: ["function", "if", "while", "for"],
     closeTokens: ["end"],
-    neutralTokens: ["do", "then", "else", "elseif"],
+    neutralTokens: ["do", "then", "else", "elseif"]
   },
   elixir: {
     caseSensitive: true,
     ignoreInDelimiters: [
       {
         open: "#",
-        close: "\n",
+        close: "\n"
       },
       {
         open: '"""',
-        close: '"""',
+        close: '"""'
       },
       {
         open: '"',
-        close: '"',
+        close: '"'
       },
       {
         open: "'",
-        close: "'",
-      },
+        close: "'"
+      }
     ],
     inlineOpenTokens: [],
     openTokens: [
@@ -109,30 +109,30 @@ export const languages: {
       "schema",
       "embedded_schema",
       "resources(?=.+do)",
-      "scope(?=.+do)",
+      "scope(?=.+do)"
     ],
     closeTokens: ["end", ", do"],
-    neutralTokens: ["do", "else", "elseif", "rescue", "after"],
+    neutralTokens: ["do", "else", "elseif", "rescue", "after"]
   },
   julia: {
     caseSensitive: true,
     ignoreInDelimiters: [
       {
         open: "#",
-        close: "\n",
+        close: "\n"
       },
       {
         open: '"""',
-        close: '"""',
+        close: '"""'
       },
       {
         open: '"',
-        close: '"',
+        close: '"'
       },
       {
         open: "'",
-        close: "'",
-      },
+        close: "'"
+      }
     ],
     inlineOpenTokens: [],
     openTokens: [
@@ -145,73 +145,73 @@ export const languages: {
       "quote",
       "do",
       "module",
-      "function",
+      "function"
     ],
     closeTokens: ["end"],
-    neutralTokens: ["else", "elseif"],
+    neutralTokens: ["else", "elseif"]
   },
   shellscript: {
     caseSensitive: true,
     ignoreInDelimiters: [
       {
         open: "#",
-        close: "\n",
+        close: "\n"
       },
       {
         open: '"',
-        close: '"',
+        close: '"'
       },
       {
         open: "'",
-        close: "'",
-      },
+        close: "'"
+      }
     ],
     inlineOpenTokens: [],
     openTokens: ["for", "if", "while", "until"],
     closeTokens: ["fi", "done"],
-    neutralTokens: ["do", "in", "then", "else"],
+    neutralTokens: ["do", "in", "then", "else"]
   },
   verilog: {
     caseSensitive: true,
     ignoreInDelimiters: [
       {
         open: "/\\*",
-        close: "\\*/",
+        close: "\\*/"
       },
       {
         open: "//",
-        close: "\n",
-      },
+        close: "\n"
+      }
     ],
     inlineOpenTokens: [],
     openTokens: ["module", "case", "begin"],
     closeTokens: ["end", "endmodule", "endcase"],
-    neutralTokens: [],
+    neutralTokens: []
   },
   vhdl: {
     caseSensitive: true,
     ignoreInDelimiters: [
       {
         open: "--",
-        close: "\n",
-      },
+        close: "\n"
+      }
     ],
     inlineOpenTokens: [],
     openTokens: ["entity", "component", "case", "begin"],
     closeTokens: ["end", "endcase"],
-    neutralTokens: [],
+    neutralTokens: []
   },
   crystal: {
     caseSensitive: true,
     ignoreInDelimiters: [
       {
         open: '"',
-        close: '"',
+        close: '"'
       },
       {
         open: "#",
-        close: "\n",
-      },
+        close: "\n"
+      }
     ],
 
     inlineOpenTokens: [],
@@ -227,17 +227,43 @@ export const languages: {
       "case",
       "unless",
       "until",
-      "do",
+      "do"
     ],
     closeTokens: ["end"],
-    neutralTokens: ["else", "elseif", "elsif", "rescue", "ensure"],
+    neutralTokens: ["else", "elseif", "elsif", "rescue", "ensure"]
   },
   COBOL: {
     caseSensitive: false,
-    ignoreInDelimiters: [],
     inlineOpenTokens: [],
-    openTokens: ["perform *?until exit", "evalute", "perform( |\r|\n)*?varying(.|\r|\n)*?until", "if"],
-    closeTokens: ["end-evalute", "end-perform", "end-if"],
-    neutralTokens: ["else", "when"],
-  },
+    openTokens: [
+      "program-id",
+      "perform",
+      "evalute",
+      "read",
+      "perform",
+      "call",
+      "evaluate",
+      "if",
+      "method-id"
+    ],
+    closeTokens: [
+      "end-perform",
+      "end-evalute",
+      "end-read",
+      "end-perform",
+      "end-call",
+      "end-evaluate",
+      "end-if",
+      "end program",
+      "end method"
+    ],
+    neutralTokens: [
+      "entry",
+      "else",
+      "when",
+      "procedure division",
+      "goback",
+      "exit program"
+    ]
+  }
 };
