@@ -236,8 +236,8 @@ export const languages: {
     caseSensitive: false,
     ignoreInDelimiters: [],
     inlineOpenTokens: [],
-    openTokens: ["perform *?until exit", "evalute", "perform( |\r|\n)*?varying", "if", "$if"],
-    closeTokens: ["end-evalute", "end-perform", "end-if", "$end"],
+    openTokens: ["perform *?until exit", "evalute", "perform( |\r|\n)*?varying", "if"],
+    closeTokens: ["end-evalute", "end-perform", "end-if"],
     neutralTokens: ["else", "when"],
   },
 };
