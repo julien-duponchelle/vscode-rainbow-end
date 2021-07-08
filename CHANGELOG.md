@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.7.9
+
+By https://github.com/jonathanschmittblog
+
+- Improve Cobol support
+
 ## 0.7.8
 
 By https://github.com/jonathanschmittblog
