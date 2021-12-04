@@ -240,4 +240,29 @@ export const languages: {
     closeTokens: ["end-evalute", "end-perform", "end-if"],
     neutralTokens: ["else", "when"],
   },
+  robot: {
+    caseSensitive: false,
+    ignoreInDelimiters: [
+        {
+            open: '"',
+            close: '"'
+        },
+        {
+            open: "#",
+            close: "\n"
+        },
+        {
+            open: "'",
+            close: "'"
+        }
+    ],
+    inlineOpenTokens: [],
+    openTokens: [
+        "if",
+        "while",
+        "case"
+    ],
+    closeTokens: ["end"],
+    neutralTokens: ["else", "else if"]
+  }
 };
