@@ -241,7 +241,7 @@ export const languages: {
     neutralTokens: ["else", "when"],
   },
   robot: {
-    caseSensitive: false,
+    caseSensitive: true,
     ignoreInDelimiters: [
         {
             open: '"',
@@ -258,11 +258,11 @@ export const languages: {
     ],
     inlineOpenTokens: [],
     openTokens: [
-        "if",
-        "while",
-        "case"
+        "IF",
+        "WHILE",
+        "CASE"
     ],
-    closeTokens: ["end"],
-    neutralTokens: ["else", "else if"]
+    closeTokens: ["END"],
+    neutralTokens: ["ELSE IF", "ELSE"]
   }
 };
