@@ -130,14 +130,24 @@ export const languages: {
         close: '"'
       },
       {
-        open: "'",
-        close: "'"
+        open: "#=",
+        close: "=#"
+      },
+      {
+        open: "\\[",
+        close: "\\]"
+      },
+      {
+        open: "\\(",
+        close: "\\)"
       }
     ],
     inlineOpenTokens: [],
     openTokens: [
       "if",
       "struct",
+      "abstract\\s+type",
+      "primitive\\s+type",
       "begin",
       "let",
       "for",
@@ -145,10 +155,12 @@ export const languages: {
       "quote",
       "do",
       "module",
-      "function"
+      "function",
+      "macro",
+      "try"
     ],
     closeTokens: ["end"],
-    neutralTokens: ["else", "elseif"]
+    neutralTokens: ["else", "elseif", "catch", "finally"]
   },
   shellscript: {
     caseSensitive: true,
