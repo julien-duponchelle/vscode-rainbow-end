@@ -13,6 +13,7 @@ This extension allows to identify keyword / end with colours.
 * Shell
 * Verilog
 * COBOL
+* Julia
 
 ## Screenshots
 

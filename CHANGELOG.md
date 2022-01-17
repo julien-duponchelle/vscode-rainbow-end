@@ -1,6 +1,34 @@
 # Changelog
 
-## [Unreleased]
+## 0.7.9
+
+By https://github.com/jonathanschmittblog
+
+- Improve Cobol support
+
+## 0.7.8
+
+By https://github.com/jonathanschmittblog
+
+- Improve Cobol support
+
+## 0.7.7
+
+By https://github.com/dddd1007
+
+- Improve the support of Julia
+
+## 0.7.6
+
+By https://github.com/UnsolvedCypher
+
+- Add "elsif" to Crystal
+
+## 0.7.5
+
+- Fix try for Crystal #24
+
+## 0.7.4
 
 By https://github.com/polvalente
 

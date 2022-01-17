@@ -239,44 +239,17 @@ export const languages: {
       "case",
       "unless",
       "until",
-      "try",
       "do"
     ],
     closeTokens: ["end"],
-    neutralTokens: ["else", "elseif", "rescue", "ensure"]
+    neutralTokens: ["else", "elseif", "elsif", "rescue", "ensure"]
   },
   COBOL: {
     caseSensitive: false,
+    ignoreInDelimiters: [],
     inlineOpenTokens: [],
-    openTokens: [
-      "program-id",
-      "perform",
-      "evalute",
-      "read",
-      "perform",
-      "call",
-      "evaluate",
-      "if",
-      "method-id"
-    ],
-    closeTokens: [
-      "end-perform",
-      "end-evalute",
-      "end-read",
-      "end-perform",
-      "end-call",
-      "end-evaluate",
-      "end-if",
-      "end program",
-      "end method"
-    ],
-    neutralTokens: [
-      "entry",
-      "else",
-      "when",
-      "procedure division",
-      "goback",
-      "exit program"
-    ]
-  }
+    openTokens: ["perform *?until exit", "evalute", "perform( |\r|\n)*?varying", "if"],
+    closeTokens: ["end-evalute", "end-perform", "end-if"],
+    neutralTokens: ["else", "when"],
+  },
 };
