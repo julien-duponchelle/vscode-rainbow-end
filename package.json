@@ -57,6 +57,21 @@
                     "highContrast": "#fffb00"
                 }
             }
+        ],
+        "languages": [
+            {
+                "id": "robot",
+                "extensions": [
+                    ".robot",
+                    ".resource"
+                ],
+                "aliases": [
+                    "Robot Framework",
+                    "robotframework",
+                    "RobotFramework"
+                ],
+                "configuration": "./robot-language-configuration.json"
+            }
         ]
     },
     "scripts": {
