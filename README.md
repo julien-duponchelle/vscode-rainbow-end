@@ -51,6 +51,11 @@ This extension allows to identify keyword / end with colours.
 
 ![Julia](images/julia.png)
 
+
+## Robot Framework
+
+We have support for the Robot Framework
+
 ## Colors customization
 
 You can override the color by putting in your `settings.json`:
@@ -78,7 +83,7 @@ Or you can contribute it by adding the language in:
 
 * Author: Julien Duponchelle: https://github.com/noplay
 * Cobol support by https://github.com/spgennard
-
+* Robot Framework by https://github.com/twilkening
 ## Release Notes
 
 See [Change log](CHANGELOG.md)

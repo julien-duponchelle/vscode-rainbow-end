@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.7.10
+
+- Robot Framework support by https://github.com/twilkening
+- Improvements for Julia
 ## 0.7.9
 
 By https://github.com/jonathanschmittblog
