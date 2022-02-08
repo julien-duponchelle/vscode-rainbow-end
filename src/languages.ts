@@ -63,8 +63,8 @@ export const languages: {
       }
     ],
     inlineOpenTokens: [],
-    openTokens: ["function", "if", "while", "for"],
-    closeTokens: ["end"],
+    openTokens: ["function", "if", "while", "for", "repeat"],
+    closeTokens: ["end", "until"],
     neutralTokens: ["do", "then", "else", "elseif"]
   },
   elixir: {
