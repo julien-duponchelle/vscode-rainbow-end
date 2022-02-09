@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.7.11
+
+By https://github.com/Duckapple
+
+- Improvements for Lua 
+- Added a way to configure more than 3 colors 
+
 ## 0.7.10
 
 - Robot Framework support by https://github.com/twilkening
