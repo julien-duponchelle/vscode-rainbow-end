@@ -3,17 +3,29 @@
 import * as vscode from "vscode";
 import { languages } from "./languages";
 
-const deepDecorations = [
-  vscode.window.createTextEditorDecorationType({
-    color: { id: "rainbowend.deep1" }
-  }),
-  vscode.window.createTextEditorDecorationType({
-    color: { id: "rainbowend.deep2" }
-  }),
-  vscode.window.createTextEditorDecorationType({
-    color: { id: "rainbowend.deep3" }
-  })
-];
+const configSection = 'rainbow-end';
+
+function createDeepDecorations(): vscode.TextEditorDecorationType[] {
+  const colors: string[] | undefined = vscode.workspace.getConfiguration(configSection).get('colors');
+
+  const mappedColors = colors?.map(
+    (color) => vscode.window.createTextEditorDecorationType({ color })
+  );
+
+  return mappedColors ?? [
+    vscode.window.createTextEditorDecorationType({
+      color: { id: "rainbowend.deep1" }
+    }),
+    vscode.window.createTextEditorDecorationType({
+      color: { id: "rainbowend.deep2" }
+    }),
+    vscode.window.createTextEditorDecorationType({
+      color: { id: "rainbowend.deep3" }
+    })
+  ];
+}
+
+let deepDecorations = createDeepDecorations();
 
 let timeout: NodeJS.Timer | null = null;
 let regExs: { [index: string]: RegExp } = {};
@@ -43,6 +55,16 @@ export function activate(context: vscode.ExtensionContext) {
     event => {
       if (activeEditor && event.document === activeEditor.document) {
         triggerUpdateDecorations(activeEditor);
+      }
+    },
+    null,
+    context.subscriptions
+  );
+
+  vscode.workspace.onDidChangeConfiguration(
+    event => {
+      if (event.affectsConfiguration(configSection)) {
+        deepDecorations = createDeepDecorations();
       }
     },
     null,

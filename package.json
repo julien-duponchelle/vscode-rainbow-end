@@ -29,6 +29,19 @@
     ],
     "main": "./out/extension",
     "contributes": {
+        "configuration": {
+            "title": "rainbow-end",
+            "properties": {
+                "rainbow-end.colors": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "format": "color"
+                    },
+                    "description": "Specifies an override of the colors used for colorising. Replaces the theme defined colors if defined!"
+                }
+            }
+        },
         "colors": [
             {
                 "id": "rainbowend.deep1",
@@ -79,7 +92,6 @@
         "compile": "tsc -p ./",
         "lint": "eslint . --ext .ts,.tsx",
         "watch": "tsc -watch -p ./"
-
     },
     "devDependencies": {
         "@types/node": "^12.12.0",
