@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.7.12 
+
+- Fix no colors when no customization is set
+
 ## 0.7.11
 
 By https://github.com/Duckapple

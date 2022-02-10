@@ -5,24 +5,29 @@ import { languages } from "./languages";
 
 const configSection = 'rainbow-end';
 
+const defaultDecorations = [
+  vscode.window.createTextEditorDecorationType({
+    color: { id: "rainbowend.deep1" }
+  }),
+  vscode.window.createTextEditorDecorationType({
+    color: { id: "rainbowend.deep2" }
+  }),
+  vscode.window.createTextEditorDecorationType({
+    color: { id: "rainbowend.deep3" }
+  })
+];
+
 function createDeepDecorations(): vscode.TextEditorDecorationType[] {
   const colors: string[] | undefined = vscode.workspace.getConfiguration(configSection).get('colors');
 
   const mappedColors = colors?.map(
     (color) => vscode.window.createTextEditorDecorationType({ color })
   );
+  if (mappedColors && mappedColors.length > 0) {
+    return mappedColors;
+  }
 
-  return mappedColors ?? [
-    vscode.window.createTextEditorDecorationType({
-      color: { id: "rainbowend.deep1" }
-    }),
-    vscode.window.createTextEditorDecorationType({
-      color: { id: "rainbowend.deep2" }
-    }),
-    vscode.window.createTextEditorDecorationType({
-      color: { id: "rainbowend.deep3" }
-    })
-  ];
+  return defaultDecorations;
 }
 
 let deepDecorations = createDeepDecorations();
