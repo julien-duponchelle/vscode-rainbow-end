@@ -15,10 +15,10 @@ export const languages: {
     caseSensitive: true,
     ignoreInDelimiters: [
       {
-        open: "#",
+        open: "#[^\{]",
         close: "\n"
       },
-      { open: "=begin", close: "=end" },
+      //{ open: "=begin", close: "=end" },
       {
         open: '"',
         close: '"'

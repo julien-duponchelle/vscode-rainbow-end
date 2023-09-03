@@ -1,6 +1,6 @@
 # Rainbow End
 
-[![Marketplace Version](https://vsmarketplacebadge.apphb.com/version/jduponchelle.rainbow-end.svg)](https://marketplace.visualstudio.com/items?itemName=jduponchelle.rainbow-end) [![Installs](https://vsmarketplacebadge.apphb.com/installs/jduponchelle.rainbow-end.svg)](https://marketplace.visualstudio.com/items?itemName=jduponchelle.rainbow-end)
+[![Marketplace Version](images/logo.png)](https://marketplace.visualstudio.com/items?itemName=jduponchelle.rainbow-end)
 
 This extension allows to identify keyword / end with colours.
 
